@@ -1,14 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ProjectForm from './pages/create-project'; // Import the ProjectForm component
+import GlobalNav from './components/navigation/nav-bar';
+import ProjectForm from './pages/create-project';
 
 function App() {
   return (
     <div className="App">
-  
-        <ProjectForm /> {/* Display the ProjectForm component */}
-      
+
+
+      <GlobalNav /> 
+      <ProjectForm /> 
+
     </div>
   );
 }
