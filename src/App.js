@@ -11,8 +11,8 @@ function App() {
 
 
       <GlobalNav /> 
-      {/* <ProjectForm />  */}
-      <APICards/>
+      <ProjectForm /> 
+      {/* <APICards/> */}
 
 
     </div>
