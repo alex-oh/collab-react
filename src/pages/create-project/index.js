@@ -40,7 +40,7 @@ function ProjectForm() {
                         </div>
                         <div className="form-group">
                             <label style={{ fontWeight: 'bold', textAlign: 'left', color: '#EAEAEA', display: 'block' }}>Project Type</label>
-                            <select className="form-control" style={{ backgroundColor: '#424242', color: '#EAEAEA', borderColor: '#626262' }} name="projectType" value={formData.projectType} onChange={handleChange}>
+                            <select className="form-control" style={{ backgroundColor: '#424242', color: '#EAEAEA', borderColor: '#626262', textAlign: 'left' }} name="projectType" value={formData.projectType} onChange={handleChange}>
                                 <option value="">-- Select a Project Type --</option>
                                 <option value="Mobile App">Mobile App</option>
                                 <option value="Web App">Web App</option>

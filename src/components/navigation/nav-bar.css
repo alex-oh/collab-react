@@ -1,44 +1,44 @@
 .frosted-glass {
-    background: rgba(18, 18, 18, 0.7);  /* Dark background with 70% opacity */
-    backdrop-filter: blur(10px);  /* Blurs the content behind the element */
-    -webkit-backdrop-filter: blur(10px);  /* For Safari browser compatibility */
-    border: 1px solid white;  /* White horizontal line at the bottom */
-    border-radius: 10px;  /* Rounded corners on all sides */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);  /* A subtle shadow for depth */
-    position: sticky;  /* Sticky positioning */
-    top: 1%;  /* Stick to the top */
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 1%;
     margin-top: 1%;
-    z-index: 1000;  /* Ensure navbar remains on top of other elements */
+    z-index: 1000;  
     margin-left: 1%;
     margin-right: 1%;
     
 }
 
 .frosted-glass a {
-    color: white;  /* Ensure navbar links are white */
+    color: white; 
 }
 
 .navbar-content {
     height: 60px;
-    padding: 0 5%;  /* Horizontal padding */
+    padding: 0 5%; 
     align-items: center;
     color: white;
     
 }
 
 .navbar-content .navbar-brand {
-    font-family: 'Tektur', sans-serif;  /* Apply Tektur font only to the brand */
+    font-family: 'Tektur', sans-serif; 
     font-weight: 900;
     color: white !important;
 }
 
 .navbar-content .navbar-brand span:first-child {
-    color: red !important;
+    color: #ff0000 !important;
 }
 
-/* Reset other navbar text styles to default */
+
 .navbar-content .navbar-nav .nav-link {
-    font-family: inherit;  /* This will ensure other navbar text uses the default font */
+    font-family: inherit; 
     font-weight: normal;
     color: white !important;
 }
