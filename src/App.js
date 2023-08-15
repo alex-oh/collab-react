@@ -1,8 +1,9 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-
-
+import GlobalNav from './components/navigation/nav-bar';
+import ProjectForm from './pages/create-project';
+import APICards from './pages/api-finder';
 
 function App() {
   return (
@@ -18,7 +19,6 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          
           Learn React
         </a>
       </header>
