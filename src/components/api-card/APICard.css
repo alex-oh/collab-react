@@ -1,0 +1,30 @@
+.button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    
+}
+
+.api-category {
+    /* font-style: italic; */
+    color: white;
+}
+
+.cardTitle {
+    font-weight: bold;
+    color: white;
+}
+
+.cardBody {
+    color: white;
+}
+
+.api-category {
+    border-radius: 50px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    padding: 5px 10px; /* Adjust as needed */
+    margin-bottom: 15px;
+}
+.custom-button:hover {
+    color: blue !important;
+}
