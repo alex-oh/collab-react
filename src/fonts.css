@@ -1,11 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;1,400&display=swap");
 
-body {
+body, input {
     font-family: "Noto Sans", sans-serif;
     font-weight: 400;
     color: #f5e8e8;
     font-size: 16px;
+    height: 24px;
+}
+
+button {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    color: #f5e8e8;
+    font-size: 14px;
     height: 24px;
 }
 
