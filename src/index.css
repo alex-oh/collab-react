@@ -5,6 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #131313;
+}
+
+input {
+    background-color: transparent;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #8a8a8a;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }
 
 code {
