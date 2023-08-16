@@ -41,3 +41,9 @@ p {
     font-size: 14px;
     height: 20px;
 }
+
+.subtext {
+    font-size: 12px;
+    height: 16px;
+    color: #646464;
+}
