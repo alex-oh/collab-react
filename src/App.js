@@ -1,29 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import GlobalNav from './components/navigation/nav-bar';
-import ProjectForm from './pages/create-project';
-import APICards from './pages/api-finder';
+// library imports
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { HashRouter, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router";
+
+// component migration
+import GlobalNav from "./components/navigation/nav-bar";
+import ProjectForm from "./pages/create-project";
+import APICards from "./pages/api-finder";
+import Home from "./pages/home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <HashRouter>
+          <div className="App">
+              <GlobalNav />
+              <Routes>
+                  <Route path="/" element={<Navigate to="/home" />} />
+                  <Route path="/home" element={<Home />} />
+              </Routes>
+              <ProjectForm />
+              {/* <APICards/> */}
+          </div>
+      </HashRouter>
   );
 }
-
 export default App;
