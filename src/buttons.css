@@ -1,0 +1,11 @@
+button.green {
+    background-color: #345438;
+}
+
+button.green:hover {
+    background-color: #4E7E54;
+}
+
+button.green-disabled {
+    background-color: #95ac98;
+}
