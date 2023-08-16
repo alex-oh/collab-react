@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;1,400&display=swap");
+
+body {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    color: #f5e8e8;
+    font-size: 16px;
+    height: 24px;
+}
+
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 57px;
+    height: 64px;
+}
+h2 {
+    font-weight: 500;
+    font-size: 45px;
+    height: 52px;
+}
+h3 {
+    font-weight: 500;
+    font-size: 36px;
+    height: 44px;
+}
+h4 {
+    font-size: 28px;
+    height: 36px;
+}
+
+p {
+    font-size: 14px;
+    height: 20px;
+}
