@@ -20,15 +20,11 @@ function MainProfile() {
         </div>
 
         <div className="col-8 border border-secondary main-content">
-          <h4 className="Active_Project_h4"> Active Projects</h4>
+          <h4 className="Active_Project_h4"> Active Projects:</h4>
           <div classname="row Active_Project_Container ">
             <div classname="Project_Name_1">
               <div className="col-4 mt-2 py-2 px-2 w-75 Active_Project_Container_image">
-                <img
-                  src={ProjectIcon}
-                  alt="Project Icon"
-                  className="ProjectIcon"
-                />
+
               </div>
               <div className="col-8 Active_Project_Container_text">
                 <div>
@@ -39,7 +35,7 @@ function MainProfile() {
                 <div>
                   <input
                     type="text"
-                    className="mt-2 py-3 w-75 Active_Project_Container_ProjectDescription"
+                    className="mt-2 py-3 w-100 Active_Project_Container_ProjectDescription"
                     placeholder="Project Description / Building a collaboration platform for Northeastern students Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna"
                   />
                 </div>
@@ -49,11 +45,7 @@ function MainProfile() {
               </div>
               <div classname="Project_Name_2">
                 <div className="col-4 mt-2 py-2 px-2 w-75 Active_Project_Container_image">
-                  <img
-                    src={ProjectIcon}
-                    alt="Project Icon"
-                    className="ProjectIcon"
-                  />
+
                 </div>
                 <div className="col-8 Active_Project_Container_text">
                   <div>
@@ -64,7 +56,7 @@ function MainProfile() {
                   <div>
                     <input
                       type="text"
-                      className="mt-2 py-3 w-75 Active_Project_Container_ProjectDescription"
+                      className="mt-2 py-3 w-100 Active_Project_Container_ProjectDescription"
                       placeholder="Project Description / Building a collaboration platform for Northeastern students Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna"
                     />
                   </div>
