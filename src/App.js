@@ -10,8 +10,11 @@ import GlobalNav from "./components/navigation/nav-bar";
 import ProjectForm from "./pages/create-project";
 import APICards from "./pages/api-finder";
 import Home from "./pages/home";
-import MainProfile from "./pages/profile";
-import Register from "./pages/login-pages/register";
+
+import Login from "./pages/login-pages/login.js";
+import Register from "./pages/login-pages/register.js";
+import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
+
 
 function App() {
     return (
@@ -21,6 +24,11 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/home" element={<Home />} />
+
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/profile-picture" element={<ProfilePictureUpload />}/>
+
                 </Routes>
                 {/* <ProjectForm /> */}
                 {/* <APICards/> */}
