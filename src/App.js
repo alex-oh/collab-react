@@ -10,6 +10,7 @@ import GlobalNav from "./components/navigation/nav-bar";
 import ProjectForm from "./pages/create-project";
 import APICards from "./pages/api-finder";
 import Home from "./pages/home";
+import MainProfile from "./pages/profile";
 
 function App() {
   return (
@@ -19,9 +20,11 @@ function App() {
               <Routes>
                   <Route path="/" element={<Navigate to="/home" />} />
                   <Route path="/home" element={<Home />} />
+                  <Route path="/main-profile" element={<MainProfile />} />
               </Routes>
-              <ProjectForm />
+              {/* <ProjectForm /> */}  
               {/* <APICards/> */}
+              <MainProfile />
           </div>
       </HashRouter>
   );
