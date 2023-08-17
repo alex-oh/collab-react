@@ -8,6 +8,11 @@ body {
   background-color: #131313;
 }
 
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
 input {
     background-color: transparent;
     border-style: solid;
@@ -21,8 +26,19 @@ p {
     padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+ul {
+    margin: 0;
+    padding: 0;
 }
+
+.project-card {
+    background-color: #262626;
+    border-style: solid 1px;
+    border-radius: 5px;
+    border-color: #444240;
+
+    margin: .5rem;
+}
+
+
 
