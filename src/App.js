@@ -36,7 +36,9 @@ function App() {
                 {/* <ProjectForm />
                 <APICards/>
                 <Register /> */}
-
+                {/* <MainProfile />
+                <UserProfilePage />
+                <EditProfile /> */}
                 
             </div>
         </HashRouter>
