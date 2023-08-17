@@ -15,6 +15,8 @@ import Login from "./pages/login-pages/login.js";
 import Register from "./pages/login-pages/register.js";
 import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
 import MainProfile from "./pages/profile/index.js";
+import UserProfilePage from "./pages/profile/user-profile-page.js";
+import EditProfile from "./pages/profile/Edit-profile-page";
 
 
 function App() {
@@ -31,10 +33,10 @@ function App() {
                     <Route path="/profile-picture" element={<ProfilePictureUpload />}/>
 
                 </Routes>
-                {/* <ProjectForm /> */}
-                {/* <APICards/> */}
-                {/* <Register /> */}
-                <MainProfile />
+                {/* <ProjectForm />
+                <APICards/>
+                <Register /> */}
+
                 
             </div>
         </HashRouter>
