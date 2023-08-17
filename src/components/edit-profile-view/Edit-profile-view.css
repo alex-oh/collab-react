@@ -1,9 +1,20 @@
-.col-3.profile-container{
+.profile-container {
     margin-left: 15%;
-}
-.mt-2.py-3.profile-user-description{
-    margin-left: -80%;
-    height: 200px;
-    width: 250px;
-    border-color: #8a8a8a;
-}
+  }
+  
+  .bio-container {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block; 
+    width: 100%; 
+    border:none;
+  }
+  
+  .bio-info {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0; 
+  }
+  
