@@ -11,22 +11,24 @@ import ProjectForm from "./pages/create-project";
 import APICards from "./pages/api-finder";
 import Home from "./pages/home";
 import MainProfile from "./pages/profile";
+import Register from "./pages/login-pages/register";
 
 function App() {
-  return (
-      <HashRouter>
-          <div className="App">
-              <GlobalNav />
-              <Routes>
-                  <Route path="/" element={<Navigate to="/home" />} />
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/main-profile" element={<MainProfile />} />
-              </Routes>
-              {/* <ProjectForm /> */}  
-              {/* <APICards/> */}
-              <MainProfile />
-          </div>
-      </HashRouter>
-  );
+    return (
+        <HashRouter>
+            <div className="App">
+                <GlobalNav />
+                <Routes>
+                    <Route path="/" element={<Navigate to="/home" />} />
+                    <Route path="/home" element={<Home />} />
+                </Routes>
+                {/* <ProjectForm /> */}
+                {/* <APICards/> */}
+                {/* <Register /> */}
+                <MainProfile />
+                
+            </div>
+        </HashRouter>
+    );
 }
 export default App;
