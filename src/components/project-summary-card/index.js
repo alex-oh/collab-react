@@ -15,6 +15,7 @@ const ProjectSummaryCard = (project) => {
                     <div className="subtext">Posted 1 hr ago</div>
                 </div>
             </div>
+            <br/> 
         </li>
     );
 };
