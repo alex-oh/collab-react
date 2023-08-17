@@ -4,6 +4,7 @@ import React from "react";
 import UserIcon from "../../assets/Image/spacex.jpg";
 
 import "./index.css";
+import ActiveProjectView from "./active-project-view";
 
 function MainProfile() {
   return (
@@ -24,45 +25,8 @@ function MainProfile() {
               <div className="col-4 mt-2 py-2 px-2 w-75 Active_Project_Container_image">
 
               </div>
-              <div className="col-8 Active_Project_Container_text">
-                <div>
-                  <h7 className="Active_Project_Container_ProjectName">
-                    Project Name1
-                  </h7>
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    className="mt-2 py-3 w-100 Active_Project_Container_ProjectDescription"
-                    placeholder="Project Description / Building a collaboration platform for Northeastern students Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna"
-                  />
-                </div>
-                <div className="mt-2 py-2 px-2 Active_Project_Container_LookingFor">
-                  <h7>Looking for _ designer</h7>
-                </div>
-              </div>
-              <div classname="Project_Name_2">
-                <div className="col-4 mt-2 py-2 px-2 w-75 Active_Project_Container_image">
-
-                </div>
-                <div className="col-8 Active_Project_Container_text">
-                  <div>
-                    <h7 className="Active_Project_Container_ProjectName">
-                      Project Name2
-                    </h7>
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      className="mt-2 py-3 w-100 Active_Project_Container_ProjectDescription"
-                      placeholder="Project Description / Building a collaboration platform for Northeastern students Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna"
-                    />
-                  </div>
-                  <div className="mt-2 py-2 px-2 Active_Project_Container_LookingFor">
-                    <h7>Looking for _ designer</h7>
-                  </div>
-                </div>
-              </div>
+                <ActiveProjectView />
+                <ActiveProjectView />    
             </div>
           </div>
         </div>

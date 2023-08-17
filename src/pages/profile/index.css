@@ -24,3 +24,11 @@
     width:100px;
 }
 
+.col-8.border.border-secondary.main-content{
+    background-color: #171717;
+    border-radius: 10px;
+    border-color: #8a8a8a;
+    border-style: solid;
+    border-width: 2px;
+}
+
