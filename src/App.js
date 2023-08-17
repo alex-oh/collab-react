@@ -14,6 +14,7 @@ import Home from "./pages/home";
 import Login from "./pages/login-pages/login.js";
 import Register from "./pages/login-pages/register.js";
 import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
+import MainProfile from "./pages/profile/index.js";
 
 
 function App() {
