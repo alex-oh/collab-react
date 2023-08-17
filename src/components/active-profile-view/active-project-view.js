@@ -1,6 +1,6 @@
 import React from "react";
 import "./active-profile-view.css"
-import "./index.css"
+
 
 function ActiveProjectView() {
   return (
