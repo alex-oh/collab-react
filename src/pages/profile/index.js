@@ -4,9 +4,10 @@ import React from "react";
 import UserIcon from "../../assets/Image/spacex.jpg";
 
 import "./index.css";
-import ActiveProjectView from "./active-project-view";
-import EditProfileView from "./Edit-profile-view";
+import ActiveProjectView from "../../components/active-profile-view/active-project-view";
+import EditProfileView from "../../components/edit-profile-view/Edit-profile-view";
 import ProjectSummaryCard from "../../components/project-summary-card";
+
 
 function MainProfile() {
   return (
@@ -27,6 +28,7 @@ function MainProfile() {
               <ProjectSummaryCard />
               <br/> 
               <ProjectSummaryCard />
+              
             </div>
           </div>
         </div>
