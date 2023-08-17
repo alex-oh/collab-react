@@ -1,10 +1,8 @@
 import React from "react";
-import GlobalNav from "../../components/navigation/nav-bar";
 
 // usericon for test
 import UserIcon from "../../assets/Image/spacex.jpg";
-// project icon for test
-import ProjectIcon from "../../assets/Image/teslabot.jpg";
+
 import "./index.css";
 
 function MainProfile() {
