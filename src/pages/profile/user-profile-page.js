@@ -12,7 +12,7 @@ import ProjectSummaryCard from "../../components/project-summary-card";
 import APICard from "../../components/api-card/APICard";
 import APICards from "../api-finder";
 
-function MainProfile() {
+function UserProfilePage() {
   return (
     <div>
       <div className="row profile-header">
@@ -54,4 +54,4 @@ function MainProfile() {
   );
 }
 
-export default MainProfile;
+export default UserProfilePage;
