@@ -5,10 +5,7 @@ const ProjectSummaryCard = (project) => {
     return (
         <li className="list-group-item project-card project-summary my-2">
             <div className="row">
-                <div className="col-2">
-                    <img/>
-                </div>
-                <div className="col-7 text-left">
+                <div className="col-9 text-left">
                     <h4>Project Name</h4>
                     <em>This is the project summary blah blah blah... lorem ipsum sit dolor amet</em>
                     <p>Looking for: 1 designer</p>
