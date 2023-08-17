@@ -5,33 +5,36 @@ import "./App.css";
 import { HashRouter, Navigate } from "react-router-dom";
 import { Routes, Route } from "react-router";
 
-// temp components for dev reference
-import FontsTest from "./components/fonts-test";
-
 // component migration
 import GlobalNav from "./components/navigation/nav-bar";
 import ProjectForm from "./pages/create-project";
 import APICards from "./pages/api-finder";
 import Home from "./pages/home";
+
 import Login from "./pages/login-pages/login.js";
 import Register from "./pages/login-pages/register.js";
 import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
+
 
 function App() {
     return (
         <HashRouter>
             <div className="App">
-                <FontsTest />
                 <GlobalNav />
                 <Routes>
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/home" element={<Home />} />
+
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile-picture" element={<ProfilePictureUpload />}/>
+
                 </Routes>
-                <ProjectForm />
+                {/* <ProjectForm /> */}
                 {/* <APICards/> */}
+                {/* <Register /> */}
+                <MainProfile />
+                
             </div>
         </HashRouter>
     );
