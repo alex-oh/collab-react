@@ -16,14 +16,28 @@ function Register() {
                 <input />
                 <p>Re-type password:</p>
                 <input />
-                <div className="subtext">Passwords match/Passwords don't match</div>
+                <div className="subtext">
+                    Passwords match/Passwords don't match
+                </div>
+                <div className="form-check">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="instructorCheck"
+                    />
+                    <label htmlFor="instructorCheck" className="form-check-label">
+                        <p>Instructor?</p>
+                    </label>
+                </div>
                 <Button variant="primary" size="md" className="green">
                     Register
                 </Button>
             </div>
             <div className="login-box text-center mt-3 py-1 px-4 w-75 mx-auto">
                 <p>
-                    Already have an account?&nbsp;&nbsp;<Link to="/login">Log in here</Link>
+                    Already have an account?&nbsp;&nbsp;
+                    <Link to="/login">Log in here</Link>
                 </p>
             </div>
         </div>
