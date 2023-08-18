@@ -15,7 +15,7 @@ import Home from "./pages/home";
 import Login from "./pages/login-pages/login.js";
 import Register from "./pages/login-pages/register.js";
 import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
-import MainProfile from "./pages/profile/index.js";
+import MainProfile from "./pages/profile";
 import UserProfilePage from "./pages/profile/user-profile-page.js";
 import EditProfile from "./pages/profile/edit-profile-page";
 import CreateProject from "./pages/create-project";
@@ -46,11 +46,11 @@ function App() {
                         />
                         <Route path="/profile" element={<MainProfile />} />
                         <Route path="/api-finder" element={<APICards />} />
-                        <Route path="/create-project" element={<CreateProject/>} />
+                        <Route
+                            path="/create-project"
+                            element={<CreateProject />}
+                        />
                     </Routes>
-                    {/* <ProjectForm />
-                <APICards/>
-                <Register /> */}
                 </div>
             </HashRouter>
         </Provider>
