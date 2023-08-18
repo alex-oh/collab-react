@@ -20,31 +20,25 @@ import UserProfilePage from "./pages/profile/user-profile-page.js";
 import EditProfile from "./pages/profile/edit-profile-page.js";
 
 function App() {
-    return (
-        <HashRouter>
-            <div className="App">
-                <GlobalNav />
-                <Routes>
-                    <Route path="/" element={<Navigate to="/home" />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route
-                        path="/profile-picture"
-                        element={<ProfilePictureUpload />}
-                    />
-                    <Route path="/profile" element={<MainProfile />} />
-                    <Route
-                        path="/user-profile"
-                        element={<UserProfilePage />}
-                    />
-                    <Route path="/edit-profile" element={<EditProfile />} />
-                </Routes>
-                {/* <ProjectForm />
+  return (
+    <HashRouter>
+      <div className="App">
+        <GlobalNav />
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile-picture" element={<ProfilePictureUpload />} />
+          <Route path="/profile" element={<MainProfile />} />
+          <Route path="/user-profile" element={<UserProfilePage />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
+        </Routes>
+        {/* <ProjectForm />
                 <APICards/>
                 <Register /> */}
-            </div>
-        </HashRouter>
-    );
+      </div>
+    </HashRouter>
+  );
 }
 export default App;
