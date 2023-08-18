@@ -1,9 +1,10 @@
 // library imports
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { HashRouter, Navigate } from "react-router-dom";
 import { Routes, Route } from "react-router";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
 
 // component migration
 import GlobalNav from "./components/navigation/nav-bar";
@@ -16,8 +17,7 @@ import Register from "./pages/login-pages/register.js";
 import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
 import MainProfile from "./pages/profile/index.js";
 import UserProfilePage from "./pages/profile/user-profile-page.js";
-import EditProfile from "./pages/profile/Edit-profile-page";
-
+import EditProfile from "./pages/profile/edit-profile-page.js";
 
 function App() {
     return (
@@ -27,19 +27,17 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/home" element={<Home />} />
-
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/profile-picture" element={<ProfilePictureUpload />}/>
-
+                    <Route
+                        path="/profile-picture"
+                        element={<ProfilePictureUpload />}
+                    />
+                    <Route path="/profile" element={<MainProfile />} />
                 </Routes>
                 {/* <ProjectForm />
                 <APICards/>
                 <Register /> */}
-                {/* <MainProfile />
-                <UserProfilePage />
-                <EditProfile /> */}
-                
             </div>
         </HashRouter>
     );

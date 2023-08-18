@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import "./fonts.css";
-import "./buttons.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
+// global css imports
+import "./global-styles/buttons.css"
+import "./global-styles/fonts.css"
+import "./global-styles/index.css"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
