@@ -9,7 +9,7 @@ function Home() {
             <div className="row">
                 <div className="col-2" />
                 <div className="col-8 text-left">
-                    <h1>Home</h1>
+                    <h1>This is the homepage.</h1>
                     <MyProjects />
                     <ProjectsFeed />
                     <Courses />

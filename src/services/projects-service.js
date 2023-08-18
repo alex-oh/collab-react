@@ -1,8 +1,9 @@
+// projects-service -> projects-controller in node server
 import axios from "axios";
 
 // set up http request urls
-const API_BASE = process.env.REACT_APP_API_BASE;
-const PROJECTS_API = `${API_BASE}/projects`;
+const SERVER_API_URL = process.env.REACT_APP_API_BASE;
+const PROJECTS_API = `${SERVER_API_URL}/projects`;
 
 // service functions, CRUD operations
 export const createProject = async (project) => {
