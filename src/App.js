@@ -19,27 +19,38 @@ import MainProfile from "./pages/profile/index.js";
 import UserProfilePage from "./pages/profile/user-profile-page.js";
 import EditProfile from "./pages/profile/edit-profile-page";
 
+// reducers
+import projectsReducer from "./reducers/projects-reducer";
+
+const store = configureStore({
+    reducer: {
+        projects: projectsReducer,
+    },
+});
+
 function App() {
     return (
-        <HashRouter>
-            <div className="App">
-                <GlobalNav />
-                <Routes>
-                    <Route path="/" element={<Navigate to="/home" />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route
-                        path="/profile-picture"
-                        element={<ProfilePictureUpload />}
-                    />
-                    <Route path="/profile" element={<MainProfile />} />
-                </Routes>
-                {/* <ProjectForm />
+        <Provider store={store}>
+            <HashRouter>
+                <div className="App">
+                    <GlobalNav />
+                    <Routes>
+                        <Route path="/" element={<Navigate to="/home" />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route
+                            path="/profile-picture"
+                            element={<ProfilePictureUpload />}
+                        />
+                        <Route path="/profile" element={<MainProfile />} />
+                    </Routes>
+                    {/* <ProjectForm />
                 <APICards/>
                 <Register /> */}
-            </div>
-        </HashRouter>
+                </div>
+            </HashRouter>
+        </Provider>
     );
 }
 export default App;
