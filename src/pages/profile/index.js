@@ -20,7 +20,7 @@ function MainProfile() {
           <EditProfileView />
         </div>
 
-        <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 border border-secondary main-content">
+        <div className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 border border-secondary main-content">
           <h4 className="Active_Project_h4"> Active Projects:</h4>
           <div classname="row Active_Project_Container ">
             <div classname="Project_Name_1">

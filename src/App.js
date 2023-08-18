@@ -34,6 +34,11 @@ function App() {
                         element={<ProfilePictureUpload />}
                     />
                     <Route path="/profile" element={<MainProfile />} />
+                    <Route
+                        path="/user-profile"
+                        element={<UserProfilePage />}
+                    />
+                    <Route path="/edit-profile" element={<EditProfile />} />
                 </Routes>
                 {/* <ProjectForm />
                 <APICards/>

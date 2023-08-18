@@ -1,0 +1,17 @@
+input[type="text"] {
+    font-size: 25px; /* Adjust the font size as needed */
+  }
+
+  .row.bio.justify-content-center {
+    height: auto; 
+    width: auto;
+    display: flex; 
+    align-items: center; 
+  }
+  
+ 
+  .row.bio.justify-content-center input[type="text"] {
+    font-size: 25px;
+    height: 100px; 
+    margin: 10px; 
+  }
