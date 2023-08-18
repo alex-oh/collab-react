@@ -7,7 +7,6 @@ function Courses() {
             <h3>Courses</h3>
             <ul>
                 <CourseCard />
-                <CourseCard />
             </ul>
         </div>
     );

@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@700&display=swap");
 
-body, input {
+body,
+input {
     font-family: "Noto Sans", sans-serif;
     font-weight: 400;
     color: #f5e8e8;
@@ -22,6 +24,14 @@ h1 {
     font-size: 57px;
     line-height: 64px;
 }
+.collab-logo {
+    font-family: "M PLUS 1 Code", sans-serif;
+    font-size: 36px;
+}
+.collab-logo:hover {
+    text-decoration: none;
+}
+
 h2 {
     font-weight: 500;
     font-size: 45px;

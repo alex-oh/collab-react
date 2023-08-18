@@ -18,6 +18,7 @@ import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js"
 import MainProfile from "./pages/profile/index.js";
 import UserProfilePage from "./pages/profile/user-profile-page.js";
 import EditProfile from "./pages/profile/edit-profile-page";
+import CreateProject from "./pages/create-project";
 
 // reducers
 import projectsReducer from "./reducers/projects-reducer";
@@ -44,6 +45,8 @@ function App() {
                             element={<ProfilePictureUpload />}
                         />
                         <Route path="/profile" element={<MainProfile />} />
+                        <Route path="/api-finder" element={<APICards />} />
+                        <Route path="/create-project" element={<CreateProject/>} />
                     </Routes>
                     {/* <ProjectForm />
                 <APICards/>
