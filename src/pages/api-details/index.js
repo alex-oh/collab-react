@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import './index.css';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useParams } from 'react-router';
 
 
 
@@ -22,6 +23,15 @@ const apiTest = {
 
 
 function APIDetails({ api = apiTest }) { // Set default prop value to the testAPI
+    // verify that url is getting an API Id
+    const params = useParams();
+    console.log(params);
+
+    // TODO: query the database via aid to get the url
+    // TODO: with that url from the database, call 3rd party api and filter by api url to get the desired api object
+    // TODO: with api object from 3rd party api, populate metadata
+    // TODO: with api object from database, populate favorited users
+    // note: having a local state variable containing the API objects might help
 
     const [userDetails, setUserDetails] = useState([]);
 
