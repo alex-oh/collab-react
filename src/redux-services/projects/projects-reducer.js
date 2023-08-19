@@ -4,7 +4,7 @@ import {
     findProjectsThunk,
     updateProjectThunk,
     deleteProjectThunk
-} from "../services/projects-thunks";
+} from "./projects-thunks";
 
 const initialState = {
     projects: [],

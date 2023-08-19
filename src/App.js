@@ -22,7 +22,7 @@ import CreateProject from "./pages/create-project";
 import APIDetails from './pages/api-details';
 
 // reducers
-import projectsReducer from "./reducers/projects-reducer";
+import projectsReducer from "./redux-services/projects/projects-reducer.js"
 
 const store = configureStore({
     reducer: {
