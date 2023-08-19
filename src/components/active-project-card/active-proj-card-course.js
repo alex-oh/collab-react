@@ -12,8 +12,6 @@ const ActiveProjectCourseCard = (project) => {
             <div>
                 <p>
                     Looking for: 1 designer
-                    <br />
-                    Pending Interest: 3
                 </p>
             </div>
         </li>
