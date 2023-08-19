@@ -11,14 +11,15 @@ export const createApi = async (api) => {
     const response = await axios.post(APIS_API, api);
     return response.data;
 };
-export const findApis = async () => {
-    // send http get request to apis_api
-    const response = await axios.get(APIS_API);
-    // extract json array from response from server
+export const findApiById = async (aid) => {
+    // send http get request to apis_api, passing in api ID
+    const response = await axios.get(APIS_API, aid);
+    // response.data is the api object returned from the server
     return response.data;
 };
 export const getApiByLink = async (apiToFind) => {
     // requests data from apis collection that has same url.
+    // UNCOMMENT THE BELOW TWO LINES ONCE CONTROLLER FUNCTION WORKS
     // const response = await axios.get(`${SERVER_API_URL}/apiLink`, apiToFind);
     // returns api object from database (has _id)
     //return response.data;

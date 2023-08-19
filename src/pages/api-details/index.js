@@ -31,6 +31,7 @@ function APIDetails({ api = apiTest }) { // Set default prop value to the testAP
     // TODO: with that url from the database, call 3rd party api and filter by api url to get the desired api object
     // TODO: with api object from 3rd party api, populate metadata
     // TODO: with api object from database, populate favorited users
+    // note: having a local state variable containing the API objects might help
 
     const [userDetails, setUserDetails] = useState([]);
 
