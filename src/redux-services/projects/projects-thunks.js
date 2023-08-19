@@ -12,7 +12,10 @@ export const createProjectThunk = createAsyncThunk(
 
 export const findProjectsThunk = createAsyncThunk(
     "projects/findProjects",
-    async () => await service.findProjects()
+    async () => {
+        const projects = await service.findProjects();
+        return projects;
+    }
 );
 
 export const updateProjectThunk = createAsyncThunk(
