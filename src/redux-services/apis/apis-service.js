@@ -17,6 +17,26 @@ export const findApis = async () => {
     // extract json array from response from server
     return response.data;
 };
+export const getApiByLink = async (apiToFind) => {
+    // requests data from apis collection that has same url.
+    // const response = await axios.get(`${SERVER_API_URL}/apiLink`, apiToFind);
+    // returns api object from database (has _id)
+    //return response.data;
+    const sampleApi = {
+        _id: "64e0359c6106817b924bcb07",
+        title: "Updated Title",
+        category: "Updated Category",
+        link: "http://updatedlink.com",
+        description:
+            "An API that provides current weather data for any location in the world.",
+        cors: "yes",
+        auth: "apiKey",
+        https: "true",
+        userFavorites: ["60fa3b254f429b1f5e5e3f1c", "60fa3b254f429b1f5e5e3f1d"],
+        __v: 0,
+    };
+    return sampleApi;
+};
 export const updateApi = async (api) => {
     const response = await axios.put(`${APIS_API}/${api._id}`, api);
     return api;
