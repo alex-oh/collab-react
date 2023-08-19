@@ -15,30 +15,46 @@ import Home from "./pages/home";
 import Login from "./pages/login-pages/login.js";
 import Register from "./pages/login-pages/register.js";
 import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
-import MainProfile from "./pages/profile/index.js";
+import MainProfile from "./pages/profile";
 import UserProfilePage from "./pages/profile/user-profile-page.js";
-import EditProfile from "./pages/profile/edit-profile-page.js";
+import EditProfile from "./pages/profile/edit-profile-page";
+import CreateProject from "./pages/create-project";
+import APIDetails from './pages/api-details';
+
+// reducers
+import projectsReducer from "./reducers/projects-reducer";
+
+const store = configureStore({
+    reducer: {
+        projects: projectsReducer,
+    },
+});
 
 function App() {
-  return (
-    <HashRouter>
-      <div className="App">
-        <GlobalNav />
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile-picture" element={<ProfilePictureUpload />} />
-          <Route path="/profile" element={<MainProfile />} />
-          <Route path="/user-profile" element={<UserProfilePage />} />
-          <Route path="/edit-profile" element={<EditProfile />} />
-        </Routes>
-        {/* <ProjectForm />
-                <APICards/>
-                <Register /> */}
-      </div>
-    </HashRouter>
-  );
+    return (
+        <Provider store={store}>
+            <HashRouter>
+                <div className="App">
+                    <GlobalNav />
+                    <Routes>
+                        <Route path="/" element={<Navigate to="/home" />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route
+                            path="/profile-picture"
+                            element={<ProfilePictureUpload />}
+                        />
+                        <Route path="/profile" element={<MainProfile />} />
+                        <Route path="/api-finder" element={<APICards />} />
+                        <Route
+                            path="/create-project"
+                            element={<CreateProject />}
+                        />
+                    </Routes>
+                </div>
+            </HashRouter>
+        </Provider>
+    );
 }
 export default App;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function ProjectForm() {
+function CreateProject() {
     const [formData, setFormData] = useState({
         projectName: '',
         description: '',
@@ -72,4 +72,4 @@ function ProjectForm() {
     );
 }
 
-export default ProjectForm;
+export default CreateProject;
