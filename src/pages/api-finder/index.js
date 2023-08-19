@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
+import sampleAPIs from './sampleAPIs.json';
+
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';

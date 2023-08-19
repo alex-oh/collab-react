@@ -1,0 +1,20 @@
+.profile-container {
+    margin-left: 15%;
+  }
+  
+  .bio-container {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block; 
+    width: 100%; 
+    border:none;
+  }
+  
+  .bio-info {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0; 
+  }
+  

@@ -1,21 +1,27 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import './nav-bar.css';
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
+import "./nav-bar.css"; // Import the CSS
+import Button from "react-bootstrap/esm/Button";
+
 
 function GlobalNav() {
     return (
         <div className="frosted-glass">
             <Navbar variant="dark" expand="lg" className="navbar-content">
-                <Navbar.Brand href="#home">
+                <Link to="home" className="collab-logo">
                     <span>NEU</span> Collab
-                </Navbar.Brand>
+                </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link href="#home">Create a Project</Nav.Link>
-                        <Nav.Link href="#link">API Finder</Nav.Link>
-                        <Nav.Link href="#link">Hi, Tom!</Nav.Link>
+                        <Link to="create-project" className="nav-item">Create a Project</Link>
+                        <Link to="api-finder" className="nav-item">API Finder</Link>
+                        <Link to="profile" className="nav-item">Hi, Tom!</Link>
+                        <Link to="register" className="nav-item">Sign up</Link>
+                        <Button className="green"><Link to="login" className="nav-item">Login</Link></Button>
+                        <Link to="logout" className="nav-item">Log out</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
