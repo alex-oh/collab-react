@@ -47,6 +47,7 @@ function App() {
                         />
                         <Route path="/profile" element={<MainProfile />} />
                         <Route path="/api-finder" element={<APICards />} />
+                        <Route path="/apis/:aid" element={<APIDetails />} />
                         <Route
                             path="/create-project"
                             element={<CreateProject />}

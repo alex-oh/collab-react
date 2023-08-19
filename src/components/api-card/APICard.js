@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge"; // Add this at the top with your other imports
 import { useNavigate } from "react-router";
 import {
-    createApi,
+    getApiByLink
 } from "../../redux-services/apis/apis-service.js";
 
 import "./APICard.css";
@@ -12,9 +12,12 @@ import "./APICard.css";
 function APICard({ api, index, favoritedIndices, toggleFavorite }) {
     let navigate = useNavigate();
 
-    const handleApiCardClick = () => {
+    const handleApiCardClick = async () => {
         console.log(`Clicked ${api.API}`);
         console.log(api);
+        const apiLocal = await getApiByLink(api);
+        // jump to that api's details page
+        navigate(`/apis/${apiLocal._id}`);
     };
 
     return (
