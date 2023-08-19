@@ -19,8 +19,8 @@ function MainProfile() {
         </div>
         <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 border border-secondary text-left main-content">
           <h4>Active Projects:</h4>
-          <div classname="row Active_Project_Container ">
-            <div classname="Project_Name_1">
+          <div className="row Active_Project_Container ">
+            <div className="Project_Name_1">
               <div className="col-4 mt-2 py-2 px-2 w-75 Active_Project_Container_image"></div>
               <ProjectSummaryCard />
               <br />

@@ -14,7 +14,7 @@ function Home() {
                     <ProjectsFeed />
                     <Courses />
                 </div>
-                <div classname="col-2" />
+                <div className="col-2" />
             </div>
         </div>
     );
