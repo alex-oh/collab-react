@@ -1,0 +1,91 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.project-details-container {
+    background-color: #121212;
+    padding: 20px;
+}
+
+.dark-card {
+    background-color: #121212;
+    border-color: #424242;
+    margin-bottom: 20px;
+    text-align: left;  /* Ensure all content inside the card is left-aligned */
+}
+
+.dark-card-header {
+    background-color: rgba(255, 255, 255, 0.1);  /* Faded white background */
+    color: white !important;  /* White text color */
+    text-align: left;  /* Ensure header content is left-aligned */
+    
+}
+
+.dark-card-body {
+    color: white;
+    text-align: left;  /* Ensure all content inside the card body is left-aligned */
+}
+
+.category-badge {
+    border-radius: 50px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    padding: 5px 10px; /* Adjust as needed */
+    margin-bottom: 15px;
+}
+
+/* Ensure consistent spacing for these elements */
+.dark-card-subtitle, .dark-card-body .card-text {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dark-card-subtitle {
+    color: white;
+    /* margin-bottom: 15px; */
+    text-align: left;  /* Ensure subtitle is left-aligned */
+}
+
+.dark-card-header, .dark-card .card-title {
+    color: white !important;
+
+}
+
+.dark-card .card-header, .dark-card .card-header h5 {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.1);;
+}
+
+.owner-link {
+    color: #00aaff;  /* Change to desired link color */
+    text-decoration: underline;  /* Optional, to underline the link */
+}
+
+/* ... (your existing styles) ... */
+
+.sticky-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0; /* Ensuring the footer starts at the very left of the viewport */
+    width: 100%;
+    background-color: rgb(55, 55, 55);
+    padding: 10px 20px; 
+    padding-left: 0; /* Removing left padding */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-button {
+    border: none;
+    color: white;
+}
+
+/* Since we're using an outline button now, ensure the outline color matches our theme */
+.footer-button.btn-outline-secondary {
+    border-color: white;
+    color: white;
+}
+

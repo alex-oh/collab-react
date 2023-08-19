@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./nav-bar.css"; // Import the CSS
 import Button from "react-bootstrap/esm/Button";
 
+
 function GlobalNav() {
     return (
         <div className="frosted-glass">

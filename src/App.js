@@ -19,6 +19,7 @@ import MainProfile from "./pages/profile";
 import UserProfilePage from "./pages/profile/user-profile-page.js";
 import EditProfile from "./pages/profile/edit-profile-page";
 import CreateProject from "./pages/create-project";
+import APIDetails from './pages/api-details';
 
 // reducers
 import projectsReducer from "./reducers/projects-reducer";
