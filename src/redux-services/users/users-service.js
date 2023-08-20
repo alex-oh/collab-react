@@ -16,3 +16,18 @@ export const findManyUsersById = async (userIds) => {
     const response = await axios.get(`${USERS_URL}/multiple`, userIds)
     return response.data;
 };
+
+export const updateUserDescription = async (username, description) => {
+    const response = await axios.put(`/api/users/${username}/description`, { description });
+    return response.data;
+};
+
+export const updateUserEmail = async (username, email) => {
+    const response = await axios.put(`/api/users/${username}/updateEmail`, { email });
+    return response.data;
+};
+
+export const updateUserPassword = async (username, password) => {
+    const response = await axios.put(`/api/users/${username}/updatePassword`, { password });
+    return response.data;
+};

@@ -11,6 +11,7 @@ function EditProfileView({ user }) {
   const [description, setDescription] = useState(user.description);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState(user.password);
+  const [errorMessage, setErrorMessage] = useState(null);
   const userDescription = useSelector((state) => {
     if (state.user && state.user.currentUser) {
       return state.user.currentUser.description;
@@ -29,6 +30,28 @@ function EditProfileView({ user }) {
   };
 
   const handleSave = () => {
+
+    fetch("/api/users/update-description", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: user.username,
+        description: description
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.message === "Description updated successfully") {
+   
+      } else {
+        
+      }
+    })
+    .catch(error => {
+      console.error("There was an error updating the description:", error);
+    });
     dispatch(updateUserDescription(description)); // Dispatch the action to update the description in the store
     setEditing(false);
   };
@@ -64,7 +87,7 @@ function EditProfileView({ user }) {
               type="text"
               value={description}
               onChange={handleDescriptionChange}
-              className="col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input "
+              className="mt-4col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input "
               placeholder="Enter a bio"
               style={{ width: "250px", height: "200px" }}
             />
@@ -73,7 +96,7 @@ function EditProfileView({ user }) {
               type="text"
               value={email}
               onChange={handleEmailChange}
-              className="col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
+              className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
               placeholder="Edit your email"
               style={{ width: "250px", height: "60px" }}
             />
@@ -82,7 +105,7 @@ function EditProfileView({ user }) {
               type="text"
               value={password}
               onChange={handlePasswordChange}
-              className="col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
+              className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
               placeholder="Edit your password"
               style={{ width: "250px", height: "60px" }}
             />
