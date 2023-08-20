@@ -19,6 +19,11 @@ export const findProjects = async () => {
     return response.data;
 };
 
+export const findProjectById = async (pid) => {
+    const response = await axios.get(`${PROJECTS_API}/${pid}`);
+    return response.data;
+}
+
 export const updateProject = async (project) => {
     const response = await axios.put(`${PROJECTS_API}/${project._id}`, project);
     return project;

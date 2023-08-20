@@ -1,9 +1,18 @@
 import React from "react";
-import './index.css'
+import { useNavigate } from "react-router";
+import "./index.css";
 
-const ProjectSummaryCard = ({project}) => {
+const ProjectSummaryCard = ({ project }) => {
+    let navigate = useNavigate();
+
+    const handleProjectCardClick = async () => {
+        navigate(`/projects/${project._id}`);
+    };
     return (
-        <li className="list-group-item project-card project-summary my-2">
+        <li
+            className="list-group-item project-card project-summary my-2"
+            onClick={handleProjectCardClick}
+        >
             <div className="row">
                 <div className="col-9 text-left">
                     <h4>{project.name}</h4>
@@ -15,7 +24,7 @@ const ProjectSummaryCard = ({project}) => {
                     <div className="subtext">{project.createDate}</div>
                 </div>
             </div>
-            <br/> 
+            <br />
         </li>
     );
 };

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
@@ -8,12 +9,19 @@ import projectData from './projectDetails.json';
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-
-
+import { findProjectById } from '../../redux-services/projects/projects-service';
 
 function ProjectDetails() {
+    const params = useParams();
+    const [project, setProject] = useState([]);
 
-    const project = projectData[0];
+    const loadProject = async() => {
+        const projectToLoad = await findProjectById(params.pid);
+        setProject(projectToLoad);
+    }
+    useEffect(() => {
+        loadProject();     
+    }, [])
 
     const [showModal, setShowModal] = useState(false);
 

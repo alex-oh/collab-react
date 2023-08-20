@@ -15,6 +15,11 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers: {
         [loginThunk.fulfilled]: (state, { payload }) => {
+            state.currentUser = payload.user;
+            console.log(state.currentUser);
+        },
+        [registerThunk.fulfilled]: (state, { payload }) => {
+            // payload is the user to be made into currentUser
             state.currentUser = payload;
         },
         [profileThunk.fulfilled]: (state, { payload }) => {
@@ -29,9 +34,7 @@ const authSlice = createSlice({
         [updateUserThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;
         },
-        [registerThunk.fulfilled]: (state, { payload }) => {
-            state.currentUser = payload;
-        },
+        
         [logoutThunk.fulfilled]: (state, action) => {
             state.currentUser = null;
         }
