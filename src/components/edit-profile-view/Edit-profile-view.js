@@ -42,20 +42,21 @@ function EditProfileView({ user }) {
       <img
         src={UserIcon}
         alt="User Icon"
-        className="mt-2 rounded-circle profile-user-icon"
+        className="mt-2 rounded-circle profile-user-icon img-fluid"
       />
       <h5 className="mt-3">{user.username}</h5>
       <div className="bio-container">
         {editing ? (
-          <div>
+          <div className="">
             <input
               type="text"
               value={description}
               onChange={handleDescriptionChange}
-              className="bio-input"
+              className="col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input "
               placeholder="Enter a bio"
               style={{ width: "250px", height: "200px" }}
             />
+            <br />
             <button
               className="btn btn-success"
               onClick={handleSave}
