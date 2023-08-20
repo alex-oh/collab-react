@@ -17,10 +17,11 @@ import Register from "./pages/login-pages/register.js";
 import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
 import Profile from "./pages/profile";
 import CreateProject from "./pages/create-project";
-import APIDetails from './pages/api-details';
+import ProjectDetails from "./pages/project-details";
+import APIDetails from "./pages/api-details";
 
 // reducers
-import projectsReducer from "./redux-services/projects/projects-reducer.js"
+import projectsReducer from "./redux-services/projects/projects-reducer.js";
 
 const store = configureStore({
     reducer: {
@@ -51,6 +52,7 @@ function App() {
                             path="/create-project"
                             element={<CreateProject />}
                         />
+                        <Route path="/projects/:pid" element={<ProjectDetails />} />
                     </Routes>
                 </div>
             </HashRouter>
