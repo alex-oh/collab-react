@@ -8,6 +8,7 @@ const PROJECTS_API = `${SERVER_API_URL}/projects`;
 
 // service functions, CRUD operations
 export const createProject = async (project) => {
+    console.log(project);
     const response = await axios.post(PROJECTS_API, project);
     return response.data;
 };
