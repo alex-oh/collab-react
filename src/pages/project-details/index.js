@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
+import { findUser } from '../../redux-services/users/users-service.js';  // Import your user service
 
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
@@ -15,19 +16,38 @@ function ProjectDetails() {
     const params = useParams();
     const [project, setProject] = useState([]);
 
-    const loadProject = async() => {
+    const loadProject = async () => {
         const projectToLoad = await findProjectById(params.pid);
         setProject(projectToLoad);
     }
+
     useEffect(() => {
-        loadProject();     
+        loadProject();
     }, [])
+
+    const [user, setUser] = useState(null);  // state to hold the user details
+
+    useEffect(() => {
+
+        const fetchUser = async () => {
+            if (project && project.projectOwner) {
+                const userDetails = await findUser(project.projectOwner);
+                setUser(userDetails);
+            }
+        }
+
+        fetchUser();
+    }, [project]);
 
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    }
 
     return (
         <div className="project-details-container">
@@ -36,21 +56,22 @@ function ProjectDetails() {
 
                 <Card.Body className="dark-card-body">
                     <Badge className="category-badge">{project.category}</Badge>
-                    <Card.Subtitle className="dark-card-subtitle">
-                        Created on: {project.createDate}
-                    </Card.Subtitle>
-                    <Card.Subtitle className="dark-card-subtitle">
-                        Start Date: {project.startDate}
-                    </Card.Subtitle>
+                    <Card.Text className="dark-card-subtitle">
+                        Created on: {formatDate(project.createDate)}
+                    </Card.Text>
+                    <Card.Text className="dark-card-subtitle">
+                        Start Date: {formatDate(project.startDate)}
+                    </Card.Text>
+
                     <Card.Text>
-                        {/* UPDATE THE HREF BELOW TO BE ...url/user_id  */}
-                        Owner: <a href="#" className="owner-link">{project.owner}</a>
+                        Owner:
+                        {user && <a href={`/users/${user._id}`} className="owner-link"> {user.username}</a>}
                     </Card.Text>
                     <Card.Text>
                         {/* UPDATE THE HREF BELOW TO BE ...url/user_id  */}
-                        NEU Class: <a href="#" className="owner-link">{project.class}</a>
+                        NEU Class: <a href="#" className="owner-link">{project.classNumber}</a>
                     </Card.Text>
-                    <Card.Text>Completion: {project.completion}%</Card.Text>
+                    <Card.Text>Completion: {project.completionPercentage}%</Card.Text>
                 </Card.Body>
             </Card>
 
@@ -61,7 +82,7 @@ function ProjectDetails() {
                 </Card.Body>
             </Card>
 
-            <Modal show={showModal} onHide={handleClose} centered>
+            {/* <Modal show={showModal} onHide={handleClose} centered>
                 <Modal.Header>
                     <Modal.Title>Signup As a Participant</Modal.Title>
                 </Modal.Header>
@@ -96,15 +117,18 @@ function ProjectDetails() {
                         Submit
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
 
 
             <footer className="sticky-footer">
-                <Button variant="outline-secondary" className="footer-button">Email Project Lead</Button>
-                <Button variant="secondary" className="footer-button" onClick={handleShow}>
-                    Signup As a Participant
-                </Button>
-
+                {user && user.email &&
+                    <a
+                        href={`mailto:${user.email}`}
+                        className="btn btn-secondary footer-button"
+                    >
+                        Email Project Lead
+                    </a>
+                }
             </footer>
         </div>
     );
