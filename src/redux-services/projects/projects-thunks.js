@@ -18,6 +18,14 @@ export const findProjectsThunk = createAsyncThunk(
     }
 );
 
+export const findMyProjectsThunk = createAsyncThunk(
+    "projects/findMyProjects",
+    async (currentUser) => {
+        const projects = await service.findMyProjects(currentUser);
+        return projects;
+    }
+)
+
 export const updateProjectThunk = createAsyncThunk(
     "projects/updateProject",
     async (project) => await service.updateProject(project)

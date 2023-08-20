@@ -3,12 +3,12 @@ import {
     createProjectThunk,
     findProjectsThunk,
     updateProjectThunk,
-    deleteProjectThunk
+    deleteProjectThunk,
+    findMyProjectsThunk,
 } from "./projects-thunks";
 
 const initialState = {
-    projects: [],
-    loading: false,
+    myProjects: [],
 };
 
 const projectsSlice = createSlice({
@@ -16,6 +16,9 @@ const projectsSlice = createSlice({
     initialState,
     extraReducers: {
         // fill this in
+        [findMyProjectsThunk.fulfilled]: (state, { payload }) => {
+            state.myProjects = payload;
+        }
     },
     reducers: {},
 });

@@ -24,6 +24,12 @@ export const findProjectById = async (pid) => {
     return response.data;
 }
 
+export const findMyProjects = async(user) => {
+    const response = await axios.get(`${SERVER_API_URL}/myProjects`, user);
+    console.log(response);
+    return response.data;
+}
+
 export const updateProject = async (project) => {
     const response = await axios.put(`${PROJECTS_API}/${project._id}`, project);
     return project;
