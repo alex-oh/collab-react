@@ -15,9 +15,7 @@ import Home from "./pages/home";
 import Login from "./pages/login-pages/login.js";
 import Register from "./pages/login-pages/register.js";
 import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
-import MainProfile from "./pages/profile";
-import UserProfilePage from "./pages/profile/user-profile-page.js";
-import EditProfile from "./pages/profile/edit-profile-page";
+import Profile from "./pages/profile";
 import CreateProject from "./pages/create-project";
 import APIDetails from './pages/api-details';
 
@@ -45,7 +43,8 @@ function App() {
                             path="/profile-picture"
                             element={<ProfilePictureUpload />}
                         />
-                        <Route path="/profile" element={<MainProfile />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/profile/:uid" element={<Profile />} />
                         <Route path="/api-finder" element={<APICards />} />
                         <Route path="/apis/:aid" element={<APIDetails />} />
                         <Route

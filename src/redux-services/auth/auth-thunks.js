@@ -26,3 +26,11 @@ export const profileThunk = createAsyncThunk("auth/profile", async () => {
     const user = await usersService.profile();
     return user;
 });
+
+export const updateUserThunk = createAsyncThunk(
+    "users/updateUser",
+    async (user) => {
+        await usersService.updateUser(user);
+        return user;
+    }
+);
