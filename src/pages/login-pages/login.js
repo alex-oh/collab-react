@@ -7,22 +7,24 @@ import { loginThunk } from "../../redux-services/auth/auth-thunks";
 
 import "./login-pages.css";
 
+const REJECTION_TYPE = "auth/login/rejected";
+
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    let { currentUser } = useSelector((state) => state.user); // currentUser is a temp variable
     const handleLogin = async () => {
         try {
-            currentUser = await dispatch(loginThunk({ username, password }));
-            // if dispatch is successful, then navigate to the profile page
-            console.log(currentUser);
-            if (currentUser != null) {
+            const response = await dispatch(loginThunk({ username, password }));
+
+            // check the type of the response
+            if (response.type == REJECTION_TYPE) {
+                console.log("rejected");
+            } else {
+                // login success!
                 // navigate to home page
                 navigate("/");
-            } else {
-                console.log("failure");
             }
         } catch (e) {
             alert(e);

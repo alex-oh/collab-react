@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { registerThunk } from "../../redux-services/auth/auth-thunks";
 import "./login-pages.css";
 
+const REJECTION_TYPE = "auth/register/rejected";
+
 function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -21,9 +23,17 @@ function Register() {
     const handleRegister = async () => {
         if (passwordMatch && username && email) {
             try {
-                const registeredUser = dispatch(registerThunk({ username, password, email }));
-                console.log(registeredUser);
-                navigate("/");
+                const response = await dispatch(
+                    registerThunk({ username, password, email })
+                );
+                // check the type of the response
+                if (response.type == REJECTION_TYPE) {
+                    console.log("rejected request");
+                } else {
+                    // register success!
+                    // navigate to home page
+                    navigate("/");
+                }
             } catch (e) {
                 alert(e);
             }
