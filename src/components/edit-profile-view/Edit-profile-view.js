@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserDescription } from "./edit-profile-reducer";
+import { updateUserDescription, updateUserEmail, updateUserPassword } from "./edit-profile-reducer";
 
 import UserIcon from "../../assets/images/profile.png";
 import "./Edit-profile-view.css";
@@ -9,6 +9,8 @@ function EditProfileView({ user }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [description, setDescription] = useState(user.description);
+  const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState(user.password);
   const userDescription = useSelector((state) => {
     if (state.user && state.user.currentUser) {
       return state.user.currentUser.description;
@@ -36,6 +38,16 @@ function EditProfileView({ user }) {
     dispatch(updateUserDescription(e.target.value));
   };
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    dispatch(updateUserEmail(e.target.value));
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    dispatch(updateUserPassword(e.target.value));
+  };
+
   return (
     <div className="col-8 col-sm-8 col-md-8 col-lg-8 profile-container">
       <h2></h2>
@@ -56,6 +68,25 @@ function EditProfileView({ user }) {
               placeholder="Enter a bio"
               style={{ width: "250px", height: "200px" }}
             />
+
+            <input
+              type="text"
+              value={email}
+              onChange={handleEmailChange}
+              className="col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
+              placeholder="Edit your email"
+              style={{ width: "250px", height: "60px" }}
+            />
+
+            <input
+              type="text"
+              value={password}
+              onChange={handlePasswordChange}
+              className="col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
+              placeholder="Edit your password"
+              style={{ width: "250px", height: "60px" }}
+            />
+
             <br />
             <button
               className="btn btn-success"
@@ -66,7 +97,9 @@ function EditProfileView({ user }) {
             </button>
           </div>
         ) : (
-          <p className="bio-info" style={{fontSize:"medium"}}>{userDescription || "Enter a bio"}</p>
+          <p className="bio-info" style={{ fontSize: "medium" }}>
+            {userDescription || "Enter a bio"}
+          </p>
         )}
       </div>
       <h6 className="mt-3">{user.email}</h6>
