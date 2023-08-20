@@ -9,14 +9,12 @@ function EditProfileView({ user }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [description, setDescription] = useState(user.description);
-  const userDescription = useSelector(
-    (state) => {
-      if (state.user && state.user.currentUser) {
-        return state.user.currentUser.description;
-      }
-      return '';
+  const userDescription = useSelector((state) => {
+    if (state.user && state.user.currentUser) {
+      return state.user.currentUser.description;
     }
-  );
+    return "";
+  });
 
   const handleEdit = () => {
     setDescription(userDescription);
@@ -56,16 +54,26 @@ function EditProfileView({ user }) {
               onChange={handleDescriptionChange}
               className="bio-input"
               placeholder="Enter a bio"
+              style={{ width: "250px", height: "200px" }}
             />
-            <button className="btn btn-success" onClick={handleSave}>Save</button>
+            <button
+              className="btn btn-success"
+              onClick={handleSave}
+              style={{ marginLeft: "5px", marginTop: "15px" }}
+            >
+              Save
+            </button>
           </div>
         ) : (
-          <p className="bio-info">{userDescription}</p>
+          <p className="bio-info" style={{fontSize:"medium"}}>{userDescription || "Enter a bio"}</p>
         )}
       </div>
       <h6 className="mt-3">{user.email}</h6>
 
-      <button onClick={editing ? handleCancel : handleEdit } className="btn btn-primary">
+      <button
+        onClick={editing ? handleCancel : handleEdit}
+        className="btn btn-primary"
+      >
         {editing ? "cancel" : "Edit Profile"}
       </button>
     </div>
