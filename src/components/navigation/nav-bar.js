@@ -12,10 +12,10 @@ function GlobalNav() {
     const dispatch = useDispatch();
     let { currentUser } = useSelector((state) => state.user);
 
-    const handleLogout = async() => { // assume this only is visible if user is logged in
+    const handleLogout = async() => {
         dispatch(logoutThunk());
-        currentUser = null;
     }
+
     return (
         <div className="frosted-glass">
             <Navbar variant="dark" expand="lg" className="navbar-content">
@@ -28,26 +28,33 @@ function GlobalNav() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Link to="create-project" className="nav-item">
+                        <Link to={currentUser ? "create-project" : "register"} className="nav-item">
                             Create a Project
                         </Link>
-                        <Link to="api-finder" className="nav-item">
+                        <Link to={currentUser ? "api-finder" : "register"} className="nav-item">
                             API Finder
                         </Link>
-                        <Link to="profile" className="nav-item">
-                            Hi, {currentUser != null ? (<span>{currentUser.username}</span>) : (<span>nobody</span>)}
-                        </Link>
-                        <Link to="register" className="nav-item">
-                            Sign up
-                        </Link>
-                        <Button className="green">
-                            <Link to="login" className="nav-item">
-                                Login
-                            </Link>
-                        </Button>
-                        <Link to="/" className="nav-item" onClick={handleLogout}>
-                            Log out
-                        </Link>
+                        {currentUser ? (
+                            <>
+                                <Link to="profile" className="nav-item">
+                                    Hi, {currentUser.username}
+                                </Link>
+                                <Link to="/" className="nav-item" onClick={handleLogout}>
+                                    Log out
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="register" className="nav-item">
+                                    Sign up
+                                </Link>
+                                <Button className="green">
+                                    <Link to="login" className="nav-item">
+                                        Login
+                                    </Link>
+                                </Button>
+                            </>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
