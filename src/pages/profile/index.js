@@ -56,10 +56,10 @@ function Profile() {
     return (
         <div>
             <div className="row profile-header">
-                <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center edit-profile-view">
+                <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center edit-profile-view">
                     <EditProfileView user={user} />
                 </div>
-                <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 border border-secondary text-left main-content">
+                <div className="mt-4 col-xs-7 col-sm-7 col-md-7 col-lg-7 border border-secondary text-left main-content">
                     <h4>Active Projects:</h4>
                     <div className="row Active_Project_Container ">
                         <div className="Project_Name_1">
