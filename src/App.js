@@ -22,10 +22,12 @@ import APIDetails from "./pages/api-details";
 
 // reducers
 import projectsReducer from "./redux-services/projects/projects-reducer.js";
+import authReducer from "./redux-services/auth/auth-reducer";
 
 const store = configureStore({
     reducer: {
         projects: projectsReducer,
+        user: authReducer,
     },
 });
 

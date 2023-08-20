@@ -19,18 +19,19 @@ export const loginThunk = createAsyncThunk(
 );
 export const logoutThunk = createAsyncThunk("auth/logout", async () => {
     const response = await authService.logout();
+    console.log(response);
     return response;
 });
 
 export const profileThunk = createAsyncThunk("auth/profile", async () => {
-    const user = await usersService.profile();
+    const user = await authService.profile();
     return user;
 });
 
 export const updateUserThunk = createAsyncThunk(
     "users/updateUser",
     async (user) => {
-        await usersService.updateUser(user);
+        await authService.updateUser(user);
         return user;
     }
 );
