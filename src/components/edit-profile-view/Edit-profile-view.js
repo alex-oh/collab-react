@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserDescription, updateUserEmail, updateUserPassword } from "./edit-profile-reducer";
+import { updateUserDescription, updateUserEmail, updateUserPassword } from "../../redux-services/users/user-reducer";
 
 import UserIcon from "../../assets/images/profile.png";
 import "./Edit-profile-view.css";
