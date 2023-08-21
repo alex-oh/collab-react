@@ -10,7 +10,7 @@ const ProjectSummaryCard = ({ project }) => {
     };
     return (
         <li
-            className="list-group-item project-card project-summary my-2"
+            className="list-group-item rounded project-card project-summary my-2"
             onClick={handleProjectCardClick}
         >
             <div className="row">

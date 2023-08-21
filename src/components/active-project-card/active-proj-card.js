@@ -10,7 +10,7 @@ const ActiveProjectCard = ({ project }) => {
     };
     return (
         <li
-            className="list-group-item project-card active-project-card"
+            className="list-group-item rounded project-card active-project-card"
             onClick={handleProjectCardClick}
         >
             {" "}

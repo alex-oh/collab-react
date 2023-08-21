@@ -13,13 +13,13 @@ function Home() {
             <div className="row">
                 <div className="col-2" />
                 <div className="col-8 text-left">
-                    <h1>This is the homepage.</h1>
-                    {myProjects.length != 0 ? <MyProjects /> : null}
-                    <ProjectsFeed />
-                    {currentUser && currentUser.type == "instructor" ? (
+                    {currentUser &&
+                    currentUser.accountType == "instructor" &&
+                    currentUser.instructorCourses ? (
                         <Courses />
                     ) : null}
-                    <Courses />
+                    {myProjects.length != 0 ? <MyProjects /> : null}
+                    <ProjectsFeed />
                 </div>
                 <div className="col-2" />
             </div>

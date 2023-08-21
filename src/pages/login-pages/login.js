@@ -31,7 +31,6 @@ function Login() {
                     console.log("user has projects");
                     dispatch(findMyProjectsThunk(currentUser));
                 }
-
                 // navigate to home page
                 navigate("/");
             }
