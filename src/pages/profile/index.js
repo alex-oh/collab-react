@@ -13,6 +13,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 
+import EditProfileProject from "../../components/edit-profile-projects/edit-profile-project.js";
 import EditProfileView from "../../components/edit-profile-view/Edit-profile-view";
 import ProjectSummaryCard from "../../components/project-summary-card";
 import APICard from "../../components/api-card/APICard";
@@ -64,9 +65,7 @@ function Profile() {
                     <div className="row Active_Project_Container ">
                         <div className="Project_Name_1">
                             <div className="col-4 mt-2 py-2 px-2 w-75 Active_Project_Container_image"></div>
-                            {/* <ProjectSummaryCard />
-                            <br />
-                            <ProjectSummaryCard /> */}
+                            <EditProfileProject />
                         </div>
                     </div>
                     <div>
