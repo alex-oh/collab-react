@@ -3,21 +3,27 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge"; // Add this at the top with your other imports
 import { useNavigate } from "react-router";
-import {
-    getApiByLink
-} from "../../redux-services/apis/apis-service.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getApiByName } from '../../redux-services/apis/apis-service.js';
 
 import "./APICard.css";
 
 function APICard({ api, index, favoritedIndices, toggleFavorite }) {
     let navigate = useNavigate();
+    let { currentUser } = useSelector((state) => state.user);
 
     const handleApiCardClick = async () => {
         console.log(`Clicked ${api.API}`);
         console.log(api);
-        const apiLocal = await getApiByLink(api);
+        const apiLocal = await getApiByName(api.API);
         // jump to that api's details page
         navigate(`/apis/${apiLocal._id}`);
+    };
+
+    const handleApiBookmark = async () => {
+        console.log(currentUser._id);
+        
+
     };
 
     return (
@@ -69,7 +75,22 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
                     }}
                     onClick={(e) => {
                         e.stopPropagation();
+
                         console.log("Favorite Button Clicked");
+                        // console.log(currentUser._id);
+                        let tempName = api.API.replace(" ", "-");
+                        console.log(tempName);
+                        const apiLocal = getApiByName(tempName);
+                        console.log(apiLocal);
+                        
+
+                        // Get clicked API card by name 
+                        // Save API ID to user profile 
+                        // Save user ID to api card 
+                     
+
+
+
                     }}
                 >
                     <span className="material-symbols-outlined">favorite</span>

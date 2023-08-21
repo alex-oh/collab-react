@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { findUser } from '../../redux-services/users/users-service.js';  // Import your user service
+import { Link } from "react-router-dom";
 
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
@@ -13,12 +14,14 @@ import Form from 'react-bootstrap/Form';
 import { findProjectById } from '../../redux-services/projects/projects-service';
 
 function ProjectDetails() {
+
     const params = useParams();
     const [project, setProject] = useState([]);
 
     const loadProject = async () => {
         const projectToLoad = await findProjectById(params.pid);
         setProject(projectToLoad);
+
     }
 
     useEffect(() => {
@@ -37,6 +40,7 @@ function ProjectDetails() {
         }
 
         fetchUser();
+
     }, [project]);
 
     const [showModal, setShowModal] = useState(false);
@@ -64,9 +68,10 @@ function ProjectDetails() {
                     </Card.Text>
 
                     <Card.Text>
-                        Owner:
-                        {user && <a href={`/users/${user._id}`} className="owner-link"> {user.username}</a>}
+                        Project Owner:
+                        {user && <Link to={`/profile/${user._id}`} className="owner-link">{user.username}</Link>}
                     </Card.Text>
+
                     <Card.Text>
                         {/* UPDATE THE HREF BELOW TO BE ...url/user_id  */}
                         NEU Class: <a href="#" className="owner-link">{project.classNumber}</a>

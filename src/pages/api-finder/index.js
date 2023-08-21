@@ -6,13 +6,20 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import APICard from '../../components/api-card/APICard';
+import { useDispatch, useSelector } from "react-redux";
+import { getApiByName } from '../../redux-services/apis/apis-service.js';
 import './index.css';
 
 function APICards() {
+
     const [searchTerm, setSearchTerm] = useState('');
     const [apis, setApis] = useState([]);
     const [displayedAPIs, setDisplayedAPIs] = useState([]);
     const [resultCount, setResultCount] = useState(0);
+
+    let { currentUser } = useSelector((state) => state.user);
+
+    console.log(currentUser._id);
 
     useEffect(() => {
         fetch("https://api.publicapis.org/entries")
