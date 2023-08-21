@@ -20,7 +20,7 @@ function MyProjects() {
         <div>
             <h3>My Projects</h3>
             <ul className="d-flex flex-wrap justify-content-around p-0">
-                {myProjects.map((project) => (
+                {myProjects.toReversed().map((project) => (
                     <ActiveProjectCard key={project._id} project={project} />
                 ))}
             </ul>
