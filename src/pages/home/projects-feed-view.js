@@ -23,7 +23,7 @@ function ProjectsFeed() {
         <div>
             <h3>Projects Feed</h3>
             <ul>
-                {projects.map((project) => (
+                {projects.toReversed().map((project) => (
                     <ProjectSummaryCard key={project._id} project={project} />
                 ))}
             </ul>

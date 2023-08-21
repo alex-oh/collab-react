@@ -44,7 +44,7 @@ function CreateProject() {
             const response = await createProject(formData);
             console.log("Project created successfully:", response);
             navigate(`/projects/${response._id}`);
-            // add project id to user
+            // add project id to user's created projects
             currentUser = {
                 ...currentUser,
                 projectsCreated: [...currentUser.projectsCreated, response._id],
