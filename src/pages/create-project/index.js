@@ -15,6 +15,7 @@ function CreateProject() {
         name: "",
         description: "",
         type: "",
+        seekingMembers: "",
         completionPercentage: 0,
         startDate: "",
         classNumber: "",
@@ -59,6 +60,7 @@ function CreateProject() {
 
     return (
         <div
+            className="mt-5 pt-4"
             style={{
                 display: "flex",
                 justifyContent: "center",
@@ -68,14 +70,14 @@ function CreateProject() {
             }}
         >
             <Card
-                className="mt-3 mb-5"
+                className="mt-5 mb-5"
                 style={{
                     width: "70%",
                     backgroundColor: "#2C2C2C",
                     color: "#EAEAEA",
                 }}
             >
-                <Card.Header as="h5" style={{ textAlign: "left" }}>
+                <Card.Header as="h3" style={{ textAlign: "left" }}>
                     Create a Project
                 </Card.Header>
                 <Card.Body>
@@ -126,6 +128,30 @@ function CreateProject() {
                                 value={formData.description}
                                 onChange={handleChange}
                             ></textarea>
+                        </div>
+                        <div className="form-group">
+                            <label
+                                style={{
+                                    fontWeight: "bold",
+                                    textAlign: "left",
+                                    color: "#EAEAEA",
+                                    display: "block",
+                                }}
+                            >
+                                What team members are you seeking out?
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                style={{
+                                    backgroundColor: "#424242",
+                                    color: "#EAEAEA",
+                                    borderColor: "#626262",
+                                }}
+                                name="seekingMembers"
+                                value={formData.seekingMembers}
+                                onChange={handleChange}
+                            />
                         </div>
                         <div className="form-group">
                             <label

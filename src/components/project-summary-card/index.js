@@ -33,7 +33,7 @@ const ProjectSummaryCard = ({ project }) => {
                 <div className="col-9 text-left">
                     <h4>{project.name}</h4>
                     <em>{project.description}</em>
-                    <p>Looking for: 1 designer</p>
+                    <p>Looking for: {project.seekingMembers}</p>
                 </div>
                 <div className="col-3 text-right">
                     <div
