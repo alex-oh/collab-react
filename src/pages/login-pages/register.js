@@ -15,7 +15,8 @@ function Register() {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [passwordMatch, setPasswordMatch] = useState(false);
-    const [isInstructor, setIsInstructor] = useState(false);
+    const [accountType, setAccountType] = useState("user");
+    const [instructorCourses, setInstructorCourses] = useState("");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -24,7 +25,13 @@ function Register() {
         if (passwordMatch && username && email) {
             try {
                 const response = await dispatch(
-                    registerThunk({ username, password, email })
+                    registerThunk({
+                        username,
+                        password,
+                        email,
+                        accountType,
+                        instructorCourses,
+                    })
                 );
                 // check the type of the response
                 if (response.type == REJECTION_TYPE) {
@@ -64,6 +71,14 @@ function Register() {
                 Password match:{" "}
                 <pre className="text-light">
                     {JSON.stringify(passwordMatch, null, 2)}
+                </pre>
+                accountType:{" "}
+                <pre className="text-light">
+                    {JSON.stringify(accountType, null, 2)}
+                </pre>
+                Course Id:{" "}
+                <pre className="text-light">
+                    {JSON.stringify(instructorCourses, null, 2)}
                 </pre>
             </div>
             <h3>Create A New Account</h3>
@@ -120,6 +135,14 @@ function Register() {
                         type="checkbox"
                         value=""
                         id="instructorCheck"
+                        onChange={(event) => {
+                            if (event.target.checked) {
+                                setAccountType("instructor");
+                            } else {
+                                setAccountType("user");
+                            }
+                            
+                        }}
                     />
                     <label
                         htmlFor="instructorCheck"
@@ -128,6 +151,19 @@ function Register() {
                         <p>Instructor?</p>
                     </label>
                 </div>
+                {accountType == "instructor" && (
+                    <>
+                        <p>Course Id</p>
+                        <input
+                            type="text"
+                            value={instructorCourses}
+                            onChange={(event) => {
+                                setInstructorCourses(event.target.value);
+                            }}
+                        />
+                    </>
+                )}
+
                 <Button
                     variant="primary"
                     size="md"
