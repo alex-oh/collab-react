@@ -1,13 +1,13 @@
 import React from "react";
 import "./index.css";
 
-const ActiveProjectCourseCard = (project) => {
+const ActiveProjectCourseCard = ({project}) => {
     return (
-        <li className="list-group-item project-card active-project-card course-view">
+        <li className="list-group-item rounded project-card active-project-card">
             {" "}
-            <h4>Active Project Name</h4>
+            <h4>{project.name}</h4>
             <em>
-                This is the project description that is longer than this...
+                {project.description}
             </em>
             <div>
                 <p>

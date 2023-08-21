@@ -23,7 +23,22 @@ export const findProjects = async () => {
 export const findProjectById = async (pid) => {
     const response = await axios.get(`${PROJECTS_API}/${pid}`);
     return response.data;
-}
+};
+
+export const findMyProjects = async (user) => {
+    const response = await axios.get(
+        `${SERVER_API_URL}/my-projects/${user._id}`
+    );
+    return response.data;
+};
+
+export const findCourseProjects = async (courseId) => {
+    const response = await axios.get(
+        `${SERVER_API_URL}/course-projects/${courseId}`
+    );
+    console.log(response);
+    return response.data;
+};
 
 export const updateProject = async (project) => {
     const response = await axios.put(`${PROJECTS_API}/${project._id}`, project);
