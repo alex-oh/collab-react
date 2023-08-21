@@ -3,12 +3,14 @@ import {
     createProjectThunk,
     findProjectsThunk,
     updateProjectThunk,
-    deleteProjectThunk
+    deleteProjectThunk,
+    findMyProjectsThunk,
 } from "./projects-thunks";
 
+import { logoutThunk } from "../auth/auth-thunks";
+
 const initialState = {
-    projects: [],
-    loading: false,
+    myProjects: [],
 };
 
 const projectsSlice = createSlice({
@@ -16,6 +18,13 @@ const projectsSlice = createSlice({
     initialState,
     extraReducers: {
         // fill this in
+        [findMyProjectsThunk.fulfilled]: (state, { payload }) => {
+            state.myProjects = payload;
+        },
+        [logoutThunk.fulfilled]: (state, action) => {
+            // clears the project
+            state.myProjects = [];
+        }
     },
     reducers: {},
 });

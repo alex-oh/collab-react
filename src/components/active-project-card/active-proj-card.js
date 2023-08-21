@@ -1,21 +1,25 @@
 import React from "react";
-import './index.css';
+import "./index.css";
 import { useNavigate } from "react-router";
 
-const ActiveProjectCard = (project) => {
+const ActiveProjectCard = ({ project }) => {
     let navigate = useNavigate();
 
     const handleProjectCardClick = async () => {
-    }
-    return(
-        <li className="list-group-item project-card active-project-card">
+        navigate(`/projects/${project._id}`);
+    };
+    return (
+        <li
+            className="list-group-item rounded project-card active-project-card"
+            onClick={handleProjectCardClick}
+        >
             {" "}
-            <h4>Title</h4>
-            <em>This is the project description that is longer than this lorem ipsum dolor sit amet</em>
+            <h4>{project.name}</h4>
+            <em>{project.description}</em>
             <div>
-                <p>Looking for: 1 designer<br/>Pending Interest: 3</p>
+                <p>Looking for: 1 designer</p>
             </div>
         </li>
     );
-}
+};
 export default ActiveProjectCard;
