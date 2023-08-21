@@ -35,7 +35,7 @@ function EditProfileProject() {
             <div className="mt-4 col-xs-7 col-sm-7 col-md-7 col-lg-7 border border-secondary text-left main-content">
                 <h4></h4>
                 {projects.map((project) => (
-                    <ProjectSummaryCard project={project} />
+                    <ProjectSummaryCard key={project._id} project={project} />
                 ))}
             </div>
         </div>
