@@ -17,7 +17,7 @@ const ActiveProjectCard = ({ project }) => {
             <h4>{project.name}</h4>
             <em>{project.description}</em>
             <div>
-                <p>Looking for: 1 designer</p>
+                <p>Looking for: {project.seekingMembers}</p>
             </div>
         </li>
     );

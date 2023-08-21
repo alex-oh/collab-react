@@ -115,6 +115,9 @@ function ProjectDetails() {
                     <Card.Text>
                         Completion: {project.completionPercentage}%
                     </Card.Text>
+                    <Card.Text>
+                        Looking for: <span className="text-danger">{project.seekingMembers}</span>
+                    </Card.Text>
                 </Card.Body>
             </Card>
 
