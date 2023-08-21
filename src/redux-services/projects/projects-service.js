@@ -26,8 +26,7 @@ export const findProjectById = async (pid) => {
 }
 
 export const findMyProjects = async(user) => {
-    const response = await axios.get(`${SERVER_API_URL}/myProjects`, user);
-    console.log(response);
+    const response = await axios.get(`${SERVER_API_URL}/my-projects/${user._id}`);
     return response.data;
 }
 
