@@ -5,7 +5,6 @@ import Courses from "./courses-view.js";
 import { useSelector } from "react-redux";
 
 function Home() {
-    let { myProjects } = useSelector((state) => state.projects);
     let { currentUser } = useSelector((state) => state.user);
 
     return (
@@ -18,7 +17,7 @@ function Home() {
                     currentUser.instructorCourses ? (
                         <Courses />
                     ) : null}
-                    {myProjects.length != 0 ? <MyProjects /> : null}
+                    {currentUser && currentUser.projectsCreated != 0 ? <MyProjects /> : null}
                     <ProjectsFeed />
                 </div>
                 <div className="col-2" />

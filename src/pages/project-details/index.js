@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import { findUser } from "../../redux-services/users/users-service.js"; // Import your user service
 
 import Card from "react-bootstrap/Card";
@@ -8,15 +9,24 @@ import Button from "react-bootstrap/Button";
 import "./index.css";
 import projectData from "./projectDetails.json";
 
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-import { findProjectById } from "../../redux-services/projects/projects-service";
+// commented out modal - future feature
+// import Modal from "react-bootstrap/Modal";
+// import Form from "react-bootstrap/Form";
+import {
+    deleteProject,
+    findProjectById,
+} from "../../redux-services/projects/projects-service";
+import { updateUserThunk } from "../../redux-services/auth/auth-thunks.js";
+import { current } from "@reduxjs/toolkit";
 
 function ProjectDetails() {
     const params = useParams();
     const [project, setProject] = useState([]);
+    const [projectOwner, setProjectOwner] = useState(null); // state to hold the user details
+    let { currentUser } = useSelector((state) => state.user);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const loadProject = async () => {
         const projectToLoad = await findProjectById(params.pid);
@@ -27,23 +37,44 @@ function ProjectDetails() {
         loadProject();
     }, []);
 
-    const [user, setUser] = useState(null); // state to hold the user details
-
     useEffect(() => {
         const fetchUser = async () => {
             if (project && project.projectOwner) {
-                const userDetails = await findUser(project.projectOwner);
-                setUser(userDetails);
+                const response = await findUser(project.projectOwner);
+                setProjectOwner(response);
             }
         };
 
         fetchUser();
     }, [project]);
 
-    const [showModal, setShowModal] = useState(false);
+    const currentUserIsProjectOwner = () => {
+        const response =
+            projectOwner &&
+            currentUser != null &&
+            projectOwner._id == currentUser._id;
+        return response;
+    };
 
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
+    const handleDeleteProject = async () => {
+        const deletedProjId = await deleteProject(project._id);
+        // remove the deleted project from current user's created projects
+        const deletedProjIndex = currentUser.projectsCreated.indexOf(
+            deletedProjId.toString()
+        );
+        // create new array with same values since projectsCreated is immutable here
+        let updatedProjectsCreated = [...currentUser.projectsCreated];
+        updatedProjectsCreated.splice(deletedProjIndex);
+        // update the user locally
+        currentUser = {...currentUser, "projectsCreated": updatedProjectsCreated};
+        // push the updated user to the server
+        dispatch(updateUserThunk(currentUser));
+        navigate("/");
+    };
+    // const [showModal, setShowModal] = useState(false);
+
+    // const handleClose = () => setShowModal(false);
+    // const handleShow = () => setShowModal(true);
 
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "2-digit", day: "2-digit" };
@@ -66,14 +97,14 @@ function ProjectDetails() {
 
                     <Card.Text>
                         Owner:{" "}
-                        {user && (
+                        {projectOwner && (
                             <span
                                 onClick={() => {
-                                    navigate(`/profile/${user._id}`);
+                                    navigate(`/profile/${projectOwner._id}`);
                                 }}
                                 className="user-hyperlink"
                             >
-                                {user.username}
+                                {projectOwner.username}
                             </span>
                         )}
                     </Card.Text>
@@ -132,9 +163,14 @@ function ProjectDetails() {
             </Modal> */}
 
             <footer className="sticky-footer">
-                {user && user.email && (
+                {currentUserIsProjectOwner() && (
+                    <Button variant="danger" onClick={handleDeleteProject}>
+                        Delete Project
+                    </Button>
+                )}
+                {projectOwner && projectOwner.email && (
                     <a
-                        href={`mailto:${user.email}`}
+                        href={`mailto:${projectOwner.email}`}
                         className="btn btn-secondary footer-button"
                     >
                         Email Project Lead

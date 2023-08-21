@@ -36,7 +36,6 @@ export const findCourseProjects = async (courseId) => {
     const response = await axios.get(
         `${SERVER_API_URL}/course-projects/${courseId}`
     );
-    console.log(response);
     return response.data;
 };
 

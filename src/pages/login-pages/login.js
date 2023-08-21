@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { loginThunk } from "../../redux-services/auth/auth-thunks";
-import { findMyProjectsThunk } from "../../redux-services/projects/projects-thunks";
+// import { findMyProjectsThunk } from "../../redux-services/projects/projects-thunks";
 
 import "./login-pages.css";
 
@@ -24,13 +24,7 @@ function Login() {
             if (response.type == REJECTION_TYPE) {
                 console.log("rejected");
             } else {
-                const currentUser = response.payload.user;
                 // login success!
-                if (currentUser.projectsCreated.length != 0) {
-                    // update the current projects if user has any
-                    console.log("user has projects");
-                    dispatch(findMyProjectsThunk(currentUser));
-                }
                 // navigate to home page
                 navigate("/");
             }
