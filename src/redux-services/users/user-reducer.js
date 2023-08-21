@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import {
+  updateUserDescriptionThunk,
+  updateUserEmailThunk,
+  updateUserPasswordThunk,
+} from "./user-thunks";
 
 const initialState = {
     currentUser: {
@@ -12,15 +16,15 @@ const initialState = {
 const editButtonSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    updateUserDescription: (state, action) => {
-    state.currentUser.description = action.payload;
+  extraReducers: {
+    [updateUserDescriptionThunk.fulfilled]: (state, { payload }) => {
+        state.currentUser.description = payload.description;
     },
-    updateUserEmail: (state, action) => {
-      state.currentUser.email = action.payload;
+    [updateUserEmailThunk.fulfilled]: (state, { payload }) => {
+        state.currentUser.email = payload.email;
     },
-    updateUserPassword: (state, action) => {
-      state.currentUser.password = action.payload;
+    [updateUserPasswordThunk.fulfilled]: (state, { payload }) => {
+        state.currentUser.password = payload.password;
     },
   },
 });

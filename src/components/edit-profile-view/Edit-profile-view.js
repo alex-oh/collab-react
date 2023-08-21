@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserDescription, updateUserEmail, updateUserPassword } from "../../redux-services/users/user-reducer";
+import { updateUserDescriptionThunk, updateUserEmailThunk, updateUserPasswordThunk } from "../../redux-services/users/user-thunks";
+import { loginThunk } from "../../redux-services/auth/auth-thunks";
 
 import UserIcon from "../../assets/images/profile.png";
 import "./Edit-profile-view.css";
@@ -12,6 +13,14 @@ function EditProfileView({ user }) {
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState(user.password);
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const username = useSelector((state) => {
+    if (state.user && state.user.currentUser) {
+      return state.user.currentUser.username;
+    }
+    return "";
+  });
+
   const userDescription = useSelector((state) => {
     if (state.user && state.user.currentUser) {
       return state.user.currentUser.description;
@@ -29,47 +38,21 @@ function EditProfileView({ user }) {
     setEditing(false);
   };
 
-  const handleSave = () => {
+  const handleSave = async (e) => {
+  
+    try {
+      const response = await dispatch(loginThunk({ username, password }));
+      console.log(response);
+      dispatch(updateUserDescriptionThunk({ username, description }));
+      dispatch(updateUserEmailThunk({ username, email }));
+      dispatch(updateUserPasswordThunk({ username, password }));
+  } catch (error) {
+      setErrorMessage("Error updating profile");
+      console.error(error);
+  }
+  setEditing(false);
+};
 
-    fetch("/api/users/update-description", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        username: user.username,
-        description: description
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if(data.message === "Description updated successfully") {
-   
-      } else {
-        
-      }
-    })
-    .catch(error => {
-      console.error("There was an error updating the description:", error);
-    });
-    dispatch(updateUserDescription(description)); // Dispatch the action to update the description in the store
-    setEditing(false);
-  };
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-    dispatch(updateUserDescription(e.target.value));
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    dispatch(updateUserEmail(e.target.value));
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    dispatch(updateUserPassword(e.target.value));
-  };
 
   return (
     <div className="col-8 col-sm-8 col-md-8 col-lg-8 profile-container">
@@ -86,7 +69,7 @@ function EditProfileView({ user }) {
             <input
               type="text"
               value={description}
-              onChange={handleDescriptionChange}
+              onChange={(e) => setDescription(e.target.value)}
               className="mt-4col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input "
               placeholder="Enter a bio"
               style={{ width: "250px", height: "200px" }}
@@ -95,7 +78,7 @@ function EditProfileView({ user }) {
             <input
               type="text"
               value={email}
-              onChange={handleEmailChange}
+              onChange={(e) => setEmail(e.target.value)}
               className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
               placeholder="Edit your email"
               style={{ width: "250px", height: "60px" }}
@@ -104,7 +87,7 @@ function EditProfileView({ user }) {
             <input
               type="text"
               value={password}
-              onChange={handlePasswordChange}
+              onChange={(e) => setPassword(e.target.value)}
               className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
               placeholder="Edit your password"
               style={{ width: "250px", height: "60px" }}
