@@ -21,3 +21,10 @@ export const updateUserPasswordThunk = createAsyncThunk(
     return await service.updateUserPassword(username, password);
   }
 );
+
+export const findUserThunk = createAsyncThunk(
+  "users/findUser",
+  async (userId) => {
+    return await service.findUser(userId);
+  }
+);

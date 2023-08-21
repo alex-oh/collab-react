@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserDescriptionThunk, updateUserEmailThunk, updateUserPasswordThunk } from "../../redux-services/users/user-thunks";
 import { loginThunk } from "../../redux-services/auth/auth-thunks";
@@ -28,30 +28,59 @@ function EditProfileView({ user }) {
     return "";
   });
 
+  const userEmail = useSelector((state) => {
+    if (state.user && state.user.currentUser) {
+      return state.user.currentUser;
+    }
+    return "";
+  });
+
+  const userPassword = useSelector((state) => {
+    if (state.user && state.user.currentUser) {
+      return state.user.currentUser;
+    }
+    return "";
+  });
+
+  // const isCurrentUser = user.username === username;
+
+  useEffect(() => {
+    setDescription(userDescription);
+    setEmail(userEmail);
+    setPassword(userPassword);
+  }, [userDescription, userEmail, userPassword]);
+
   const handleEdit = () => {
     setDescription(userDescription);
+    setEmail(userEmail);
+    setPassword(userPassword);
     setEditing(true);
   };
 
   const handleCancel = () => {
     setDescription(userDescription);
+    setEmail(userEmail);
+    setPassword(userPassword);
     setEditing(false);
   };
 
   const handleSave = async (e) => {
-  
+    e.preventDefault();
     try {
       const response = await dispatch(loginThunk({ username, password }));
       console.log(response);
       dispatch(updateUserDescriptionThunk({ username, description }));
+
       dispatch(updateUserEmailThunk({ username, email }));
       dispatch(updateUserPasswordThunk({ username, password }));
+      
   } catch (error) {
       setErrorMessage("Error updating profile");
       console.error(error);
   }
   setEditing(false);
 };
+
 
 
   return (
@@ -109,7 +138,7 @@ function EditProfileView({ user }) {
         )}
       </div>
       <h6 className="mt-3">{user.email}</h6>
-
+{/* {isCurrentUser && ( */}
       <button
         onClick={editing ? handleCancel : handleEdit}
         className="btn btn-primary"
