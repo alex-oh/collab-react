@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Link, useNavigate } from "react-router-dom"; // Changed to useNavigate
+import { useNavigate } from "react-router-dom"; // Changed to useNavigate
 import { useDispatch, useSelector } from "react-redux";
 import { createProject } from "../../redux-services/projects/projects-service.js";
 import { updateUserThunk } from "../../redux-services/auth/auth-thunks.js";

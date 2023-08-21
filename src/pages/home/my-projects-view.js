@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ActiveProjectCard from "../../components/active-project-card/active-proj-card.js";
+import { findMyProjects } from "../../redux-services/projects/projects-service.js";
 
 function MyProjects() {
-    let { myProjects } = useSelector((state) => state.projects);
+    const [myProjects, setMyProjects] = useState([]);
+    const { currentUser } = useSelector((state) => state.user);
+
+    const loadMyProjects = async () => {
+        const response = await findMyProjects(currentUser);
+        setMyProjects(response);
+    };
+
+    useEffect(() => {
+        loadMyProjects();
+    }, []);
 
     return (
         <div>
