@@ -1,40 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import { findUser } from '../../redux-services/users/users-service.js';  // Import your user service
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router";
+import { findUser } from "../../redux-services/users/users-service.js"; // Import your user service
 
-import Card from 'react-bootstrap/Card';
-import Badge from 'react-bootstrap/Badge';
-import Button from 'react-bootstrap/Button';
-import './index.css';
-import projectData from './projectDetails.json';
+import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+import "./index.css";
+import projectData from "./projectDetails.json";
 
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import { findProjectById } from '../../redux-services/projects/projects-service';
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import { findProjectById } from "../../redux-services/projects/projects-service";
 
 function ProjectDetails() {
     const params = useParams();
     const [project, setProject] = useState([]);
 
+    const navigate = useNavigate();
+
     const loadProject = async () => {
         const projectToLoad = await findProjectById(params.pid);
         setProject(projectToLoad);
-    }
+    };
 
     useEffect(() => {
         loadProject();
-    }, [])
+    }, []);
 
-    const [user, setUser] = useState(null);  // state to hold the user details
+    const [user, setUser] = useState(null); // state to hold the user details
 
     useEffect(() => {
-
         const fetchUser = async () => {
             if (project && project.projectOwner) {
                 const userDetails = await findUser(project.projectOwner);
                 setUser(userDetails);
             }
-        }
+        };
 
         fetchUser();
     }, [project]);
@@ -45,9 +46,9 @@ function ProjectDetails() {
     const handleShow = () => setShowModal(true);
 
     const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const options = { year: "numeric", month: "2-digit", day: "2-digit" };
         return new Date(dateString).toLocaleDateString(undefined, options);
-    }
+    };
 
     return (
         <div className="project-details-container">
@@ -64,14 +65,25 @@ function ProjectDetails() {
                     </Card.Text>
 
                     <Card.Text>
-                        Owner:
-                        {user && <a href={`/users/${user._id}`} className="owner-link"> {user.username}</a>}
+                        Owner:{" "}
+                        {user && (
+                            <span
+                                onClick={() => {
+                                    navigate(`/profile/${user._id}`);
+                                }}
+                                className="user-hyperlink"
+                            >
+                                {user.username}
+                            </span>
+                        )}
                     </Card.Text>
                     <Card.Text>
                         {/* UPDATE THE HREF BELOW TO BE ...url/user_id  */}
-                        NEU Class: <a href="#" className="owner-link">{project.classNumber}</a>
+                        NEU Class: {project.classNumber}
                     </Card.Text>
-                    <Card.Text>Completion: {project.completionPercentage}%</Card.Text>
+                    <Card.Text>
+                        Completion: {project.completionPercentage}%
+                    </Card.Text>
                 </Card.Body>
             </Card>
 
@@ -119,16 +131,15 @@ function ProjectDetails() {
                 </Modal.Footer>
             </Modal> */}
 
-
             <footer className="sticky-footer">
-                {user && user.email &&
+                {user && user.email && (
                     <a
                         href={`mailto:${user.email}`}
                         className="btn btn-secondary footer-button"
                     >
                         Email Project Lead
                     </a>
-                }
+                )}
             </footer>
         </div>
     );
