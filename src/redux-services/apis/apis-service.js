@@ -27,6 +27,7 @@ export const getApiByName = async (apiToFind) => {
     //return response.data;
 
     const response = await axios.get("http://localhost:4000/api/apis/name", { params: apiToFind });
+    
     console.log(response);
 
     const sampleApi = {
