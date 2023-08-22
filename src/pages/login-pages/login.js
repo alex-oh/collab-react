@@ -35,7 +35,7 @@ function Login() {
         }
     };
     return (
-        <div className="w-50 m-auto">
+        <div className="login-container">
             {showInput && (
                 <div>
                     Username:{" "}
@@ -49,7 +49,7 @@ function Login() {
                 </div>
             )}
 
-            <h3>Sign into Collab</h3>
+            <h3 className="mx-5">Sign into Collab</h3>
             <div className="login-box d-flex flex-column p-4 w-75 m-auto">
                 <p>Username</p>
                 <input
@@ -66,7 +66,7 @@ function Login() {
                 <Button
                     variant="primary"
                     size="sm"
-                    className="green"
+                    className="green mt-3"
                     onClick={handleLogin}
                 >
                     Login
