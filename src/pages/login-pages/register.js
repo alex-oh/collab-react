@@ -52,7 +52,7 @@ function Register() {
     };
 
     return (
-        <div className="w-50 m-auto">
+        <div className="login-container m-auto">
             {showInput && (
                 <div>
                     Email:{" "}
@@ -86,7 +86,7 @@ function Register() {
                 </div>
             )}
 
-            <h3>Create A New Account</h3>
+            <h3 className="mx-4">Create A New Account</h3>
             <div className="login-box d-flex flex-column p-4 w-75 m-auto">
                 <p>Email:</p>
                 <input
@@ -171,7 +171,7 @@ function Register() {
                 <Button
                     variant="primary"
                     size="md"
-                    className="green"
+                    className="green mt-3"
                     onClick={handleRegister}
                 >
                     Register

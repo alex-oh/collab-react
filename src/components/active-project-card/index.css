@@ -1,9 +1,24 @@
 .active-project-card {
     height: auto;
-    width: 45%;
+    width: 23rem;
     text-align: left;
 }
 
 .course-view {
     width: 30%;
+}
+
+
+/* tablets */
+@media only screen and (max-width : 1024px) {
+    .active-project-card {
+        width: 18rem;
+    }
+}
+
+/* smartphones */
+@media only screen and (max-width : 640px) {
+    .active-project-card {
+        width: 100%;
+    }
 }

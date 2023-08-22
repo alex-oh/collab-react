@@ -29,12 +29,12 @@ const ProjectSummaryCard = ({ project }) => {
             onClick={handleProjectCardClick}
         >
             <div className="row">
-                <div className="col-9 text-left">
+                <div className="col-lg-9 col-sm-8 text-left">
                     <h4>{project.name}</h4>
                     <em>{project.description}</em>
                     <p>Looking for: {project.seekingMembers}</p>
                 </div>
-                <div className="col-3 text-right">
+                <div className="col-lg-3 col-sm-4 text-right">
                     <div
                         onClick={(e) => {
                             e.stopPropagation();

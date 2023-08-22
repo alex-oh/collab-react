@@ -1,3 +1,8 @@
+.login-container {
+    width: 27rem;
+    margin: auto;
+}
+
 .login-box {
     background-color: #171717;
     border-radius: 10px;
@@ -6,4 +11,16 @@
     border-width: 2px;
 
     text-align: left;
+}
+
+/* tablets */
+@media only screen and (max-width : 1024px) {
+    
+}
+/* smartphones */
+@media only screen and (max-width : 640px) {
+    .login-container {
+        width: 100%;
+        text-align: left;
+    }
 }
