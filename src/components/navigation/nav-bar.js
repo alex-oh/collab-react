@@ -23,7 +23,7 @@ function GlobalNav() {
                     <span>NEU</span> Collab
                 </Link>
                 <div className="nav-item float-left">
-                    User: {JSON.stringify(currentUser, null, 2)}
+                    User: {currentUser ? (<>{currentUser._id}</>) : (<>none</>)}
                 </div>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

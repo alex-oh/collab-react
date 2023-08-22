@@ -13,7 +13,7 @@ function Home() {
                 <div className="col-2" />
                 <div className="col-8 text-left">
                     {currentUser &&
-                    currentUser.accountType == "instructor" &&
+                    currentUser.accountType === "instructor" &&
                     currentUser.instructorCourses ? (
                         <Courses />
                     ) : null}

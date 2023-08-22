@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./index.css";
+
+//services
 import { findUser } from "../../redux-services/users/users-service";
-import EditProfileBookmarks from "../../components/edit-profile-bookmarks/edit-profile-bookmarks";
-import EditProfileProject from "../../components/edit-profile-projects/edit-profile-project.js";
+import { findMyProjects } from "../../redux-services/projects/projects-service";
+import { findApiById } from "../../redux-services/apis/apis-service";
+
+//components
 import EditProfileView from "../../components/edit-profile-view/Edit-profile-view";
 import ProjectSummaryCard from "../../components/project-summary-card";
-import { findMyProjects } from "../../redux-services/projects/projects-service";
 import APICard from "../../components/api-card/APICard";
-import APICards from "../api-finder";
-import { findApiById } from "../../redux-services/apis/apis-service";
 
 function Profile() {
     const { uid } = useParams();
@@ -52,10 +53,10 @@ function Profile() {
         if (user.favoriteApis) {
             user.favoriteApis.map((apiId) => {
                 const apiObject = allApis.find(
-                    (api) => api.url == findApiById(apiId).link
+                    (api) => api.url === findApiById(apiId).link
                 );
                 // add to the local bookmarked apis list
-                if (bookmarkedAPIsList.indexOf(apiObject) == -1) {
+                if (bookmarkedAPIsList.indexOf(apiObject) === -1) {
                     bookmarkedAPIsList.push(apiObject);
                 }
             });
@@ -120,14 +121,6 @@ function Profile() {
             </div>
         </div>
     );
-}
-
-function getCurrentUserId() {
-    const currentUser = useSelector((state) =>
-        state.user ? state.user.currentUser : null
-    );
-
-    return currentUser;
 }
 
 export default Profile;

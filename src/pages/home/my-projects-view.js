@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ActiveProjectCard from "../../components/active-project-card/active-proj-card.js";
 import { findMyProjects } from "../../redux-services/projects/projects-service.js";
 

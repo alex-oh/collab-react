@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
@@ -18,6 +18,8 @@ function Register() {
     const [accountType, setAccountType] = useState("user");
     const [instructorCourses, setInstructorCourses] = useState("");
 
+    const showInput = false; // toggle to see local state variables
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -34,7 +36,7 @@ function Register() {
                     })
                 );
                 // check the type of the response
-                if (response.type == REJECTION_TYPE) {
+                if (response.type === REJECTION_TYPE) {
                     console.log("rejected request");
                 } else {
                     // register success!
@@ -51,36 +53,39 @@ function Register() {
 
     return (
         <div className="w-50 m-auto">
-            <div>
-                Email:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(email, null, 2)}
-                </pre>
-                Username:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(username, null, 2)}
-                </pre>
-                Password:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(password, null, 2)}
-                </pre>
-                Password repeated:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(password2, null, 2)}
-                </pre>
-                Password match:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(passwordMatch, null, 2)}
-                </pre>
-                accountType:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(accountType, null, 2)}
-                </pre>
-                Course Id:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(instructorCourses, null, 2)}
-                </pre>
-            </div>
+            {showInput && (
+                <div>
+                    Email:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(email, null, 2)}
+                    </pre>
+                    Username:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(username, null, 2)}
+                    </pre>
+                    Password:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(password, null, 2)}
+                    </pre>
+                    Password repeated:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(password2, null, 2)}
+                    </pre>
+                    Password match:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(passwordMatch, null, 2)}
+                    </pre>
+                    accountType:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(accountType, null, 2)}
+                    </pre>
+                    Course Id:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(instructorCourses, null, 2)}
+                    </pre>
+                </div>
+            )}
+
             <h3>Create A New Account</h3>
             <div className="login-box d-flex flex-column p-4 w-75 m-auto">
                 <p>Email:</p>
@@ -101,7 +106,7 @@ function Register() {
                     value={password}
                     onChange={(event) => {
                         setPassword(event.target.value);
-                        if (event.target.value == password2) {
+                        if (event.target.value === password2) {
                             setPasswordMatch(true);
                         } else {
                             setPasswordMatch(false);
@@ -114,7 +119,7 @@ function Register() {
                     value={password2}
                     onChange={(event) => {
                         setPassword2(event.target.value);
-                        if (event.target.value == password) {
+                        if (event.target.value === password) {
                             setPasswordMatch(true);
                         } else {
                             setPasswordMatch(false);
@@ -141,7 +146,6 @@ function Register() {
                             } else {
                                 setAccountType("user");
                             }
-                            
                         }}
                     />
                     <label
@@ -151,7 +155,7 @@ function Register() {
                         <p>Instructor?</p>
                     </label>
                 </div>
-                {accountType == "instructor" && (
+                {accountType === "instructor" && (
                     <>
                         <p>Course Id</p>
                         <input
