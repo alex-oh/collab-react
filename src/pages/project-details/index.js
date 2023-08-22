@@ -64,7 +64,7 @@ function ProjectDetails() {
         const response =
             projectOwner &&
             currentUser != null &&
-            projectOwner._id == currentUser._id;
+            projectOwner._id == params.uid;
         return response;
     };
 

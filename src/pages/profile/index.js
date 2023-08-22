@@ -1,57 +1,77 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
-
-// styling
+import { useSelector, useDispatch } from "react-redux";
 import "./index.css";
-
-// services
 import { findUser } from "../../redux-services/users/users-service";
-
-// Bootstrap components
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
-
+import EditProfileBookmarks from "../../components/edit-profile-bookmarks/edit-profile-bookmarks";
 import EditProfileProject from "../../components/edit-profile-projects/edit-profile-project.js";
 import EditProfileView from "../../components/edit-profile-view/Edit-profile-view";
 import ProjectSummaryCard from "../../components/project-summary-card";
+import { findMyProjects } from "../../redux-services/projects/projects-service";
 import APICard from "../../components/api-card/APICard";
 import APICards from "../api-finder";
+import { findApiById } from "../../redux-services/apis/apis-service";
 
 function Profile() {
-    const params = useParams();
+    const { uid } = useParams();
+    const { currentUser } = useSelector((state) => state.user);
     const [user, setUser] = useState([]);
     const [projects, setProjects] = useState([]);
+    const [bookmarkedAPIs, setBookmarkedAPIs] = useState([]);
 
     let userId = null;
-
-    if (!params.uid) {
-        // if there's no id after profile/, then go to currentUser's page
-        console.log("current user's page");
-        // setUser to the currentUser app state variable
+    if (uid) {
+        userId = uid;
     } else {
-        userId = params.uid;
-        // setUser to a user object (get user by id)
+        userId = currentUser._id;
     }
 
-    // async function to load user based on userId
     const loadUser = async () => {
-        const userToLoad = await findUser(userId);
-        setUser(userToLoad);
+        try {
+            if (userId != null) {
+                const userToLoad = await findUser(userId);
+                setUser(userToLoad);
+            }
+        } catch (error) {
+            console.error("Failed to load user:", error);
+        }
     };
 
-    const loadProjects = () => {
-        // load projects to the local state so we can display them in the profile page
-    }
-    // load the user
+    const loadMyProjects = async () => {
+        const response = await findMyProjects(user);
+        console.log(response);
+        setProjects(response);
+    };
+
+    const fetchUserBookmarkedAPIs = async () => {
+        // Replace this with the actual API call to fetch the user's bookmarked APIs
+        const response = await fetch("https://api.publicapis.org/entries");
+        const data = await response.json();
+        const allApis = data.entries;
+        let bookmarkedAPIsList = [];
+        if (user.favoriteApis) {
+            user.favoriteApis.map((apiId) => {
+                const apiObject = allApis.find(
+                    (api) => api.url == findApiById(apiId).link
+                );
+                // add to the local bookmarked apis list
+                if (bookmarkedAPIsList.indexOf(apiObject) == -1) {
+                    bookmarkedAPIsList.push(apiObject);
+                }
+            });
+            setBookmarkedAPIs(bookmarkedAPIsList);
+        }
+    };
+
+    // load user
     useEffect(() => {
         loadUser();
     }, []);
 
-    // confirm local state user variable
+    // laod user's projects
     useEffect(() => {
-        console.log(user);
+        loadMyProjects();
+        fetchUserBookmarkedAPIs();
     }, [user]);
 
     return (
@@ -65,20 +85,34 @@ function Profile() {
                     <div className="row Active_Project_Container ">
                         <div className="Project_Name_1">
                             <div className="col-4 mt-2 py-2 px-2 w-75 Active_Project_Container_image"></div>
-                            <EditProfileProject />
+                            {projects.map((project) => (
+                                <ProjectSummaryCard
+                                    key={project._id}
+                                    project={project}
+                                />
+                            ))}
                         </div>
                     </div>
                     <div>
                         <h4 className="mt-4 bookmarks-h4">Bookmarks:</h4>
                         <div className="row mt-4 bookmarks-row d-flex flex-wrap">
-                            <div className="w-10 m-2">
-                                <APICard api={APICards} />
-                            </div>
-                            <div className="w-10 m-2">
-                                <APICard api={APICards} />
-                            </div>
-                            <div className="w-10 m-2">
-                                <APICard api={APICards} />
+                            <div
+                                style={{
+                                    width: "70%",
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    justifyContent: "flex-start",
+                                }}
+                            >
+                                {bookmarkedAPIs.map((api, index) => (
+                                    <div
+                                        key={index}
+                                        className="mb-4"
+                                        style={{ marginRight: "2%" }}
+                                    >
+                                        <APICard api={api} index={index} />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -86,6 +120,14 @@ function Profile() {
             </div>
         </div>
     );
+}
+
+function getCurrentUserId() {
+    const currentUser = useSelector((state) =>
+        state.user ? state.user.currentUser : null
+    );
+
+    return currentUser;
 }
 
 export default Profile;
