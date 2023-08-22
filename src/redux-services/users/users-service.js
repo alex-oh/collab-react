@@ -31,3 +31,8 @@ export const updateUserPassword = async (username, password) => {
     const response = await axios.put(`${USERS_URL}/${username}/updatePassword`, {password});
     return response.data;
 };
+
+export const addFavoriteApiToUser = async (userId, apiId) => {
+    const response = await axios.put(`${USERS_URL}/${userId}/favorite`, { apiId });
+    return response.data;
+};

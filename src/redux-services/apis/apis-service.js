@@ -20,31 +20,11 @@ export const findApiById = async (aid) => {
 };
 
 export const getApiByName = async (apiToFind) => {
-    // requests data from apis collection that has same url.
-    // UNCOMMENT THE BELOW TWO LINES ONCE CONTROLLER FUNCTION WORKS
-    // const response = await axios.get(`${SERVER_API_URL}/apiLink`, apiToFind);
-    // returns api object from database (has _id)
-    //return response.data;
-
-    const response = await axios.get("http://localhost:4000/api/apis/name", { params: apiToFind });
-    
-    console.log(response);
-
-    const sampleApi = {
-        _id: "64e0359c6106817b924bcb07",
-        title: "Updated Title",
-        category: "Updated Category",
-        link: "http://updatedlink.com",
-        description:
-            "An API that provides current weather data for any location in the world.",
-        cors: "yes",
-        auth: "apiKey",
-        https: "true",
-        userFavorites: ["60fa3b254f429b1f5e5e3f1c", "60fa3b254f429b1f5e5e3f1d"],
-        __v: 0,
-    };
-    return response;
+    const response = await axios.get(`http://localhost:4000/api/apis/name/${apiToFind}`);
+    return response.data;  // Return the actual data
 };
+
+
 
 export const updateApi = async (api) => {
     const response = await axios.put(`${APIS_API}/${api._id}`, api);

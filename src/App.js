@@ -1,4 +1,3 @@
-// library imports
 import React from "react";
 import "./App.css";
 import { HashRouter, Navigate } from "react-router-dom";
@@ -6,7 +5,6 @@ import { Routes, Route } from "react-router";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
-// component migration
 import GlobalNav from "./components/navigation/nav-bar";
 import ProjectForm from "./pages/create-project";
 import APICards from "./pages/api-finder";
@@ -20,7 +18,6 @@ import CreateProject from "./pages/create-project";
 import ProjectDetails from "./pages/project-details";
 import APIDetails from "./pages/api-details";
 
-// reducers
 import authReducer from "./redux-services/auth/auth-reducer";
 
 const store = configureStore({
@@ -36,8 +33,8 @@ function App() {
                 <div className="App">
                     <GlobalNav />
                     <Routes>
-                        <Route path="/" element={<Navigate to="/home" />} />
-                        <Route path="/home" element={<Home />} />
+                        {/* <Route path="/" element={<Navigate to="/home" />} /> */}
+                        {/* <Route path="/home" element={<Home />} /> */}
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route

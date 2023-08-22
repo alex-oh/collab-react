@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { findUser } from "../../redux-services/users/users-service.js"; // Import your user service
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { findProjectById } from '../../redux-services/projects/projects-service';
 
 import { Link } from "react-router-dom";
 
@@ -14,9 +13,6 @@ import Button from "react-bootstrap/Button";
 import "./index.css";
 import projectData from "./projectDetails.json";
 
-// commented out modal - future feature
-// import Modal from "react-bootstrap/Modal";
-// import Form from "react-bootstrap/Form";
 import {
     deleteProject,
     findProjectById,
@@ -38,10 +34,6 @@ function ProjectDetails() {
     const loadProject = async () => {
         const projectToLoad = await findProjectById(params.pid);
         setProject(projectToLoad);
-
-
-    }
-
     };
 
     useEffect(() => {
@@ -78,7 +70,7 @@ function ProjectDetails() {
         let updatedProjectsCreated = [...currentUser.projectsCreated];
         updatedProjectsCreated.splice(deletedProjIndex);
         // update the user locally
-        currentUser = {...currentUser, "projectsCreated": updatedProjectsCreated};
+        currentUser = { ...currentUser, "projectsCreated": updatedProjectsCreated };
         // push the updated user to the server
         dispatch(updateUserThunk(currentUser));
         navigate("/");
@@ -108,10 +100,8 @@ function ProjectDetails() {
                     </Card.Text>
 
                     <Card.Text>
-
                         Project Owner:
-                        {user && <Link to={`/profile/${user._id}`} className="owner-link">{user.username}</Link>}
-
+                        {projectOwner && <Link to={`/profile/${projectOwner._id}`} className="owner-link">{projectOwner.username}</Link>}
                         Owner:{" "}
                         {projectOwner && (
                             <span
@@ -123,7 +113,6 @@ function ProjectDetails() {
                                 {projectOwner.username}
                             </span>
                         )}
-                        
                     </Card.Text>
 
                     <Card.Text>
@@ -146,42 +135,7 @@ function ProjectDetails() {
                 </Card.Body>
             </Card>
 
-            {/* <Modal show={showModal} onHide={handleClose} centered>
-                <Modal.Header>
-                    <Modal.Title>Signup As a Participant</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group>
-                            <Form.Label>Expected Graduation Date</Form.Label>
-                            <Form.Control type="date" />
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>How many hours per week can you give?</Form.Label>
-                            <Form.Control as="select">
-                                <option>1 - 5 Hours</option>
-                                <option>5 - 10 Hours</option>
-                                <option>10 - 20 Hours</option>
-                                <option>21+ Hours</option>
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>What skill can you provide?</Form.Label>
-                            <Form.Control type="text" />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="light" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="dark" type="submit">
-                        Submit
-                    </Button>
-                </Modal.Footer>
-            </Modal> */}
+            
 
             <footer className="sticky-footer">
                 {currentUserIsProjectOwner() && (
