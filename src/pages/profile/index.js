@@ -93,7 +93,7 @@ function Profile() {
                 <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center edit-profile-view">
                     <EditProfileView user={user} />
                 </div>
-                <div className="mt-4 col-xs-7 col-sm-7 col-md-7 col-lg-7 border border-secondary text-left main-content">
+                <div className="mt-4 col-xs-7 col-sm-7 col-md-7 col-lg-7 border-0 text-left main-content">
                     <h4>Active Projects:</h4>
                     <div className="row Active_Project_Container ">
                         <div className="Project_Name_1">
@@ -108,7 +108,7 @@ function Profile() {
                     </div>
                     <div>
                         <h4 className="mt-4 bookmarks-h4">Bookmarks:</h4>
-                        <div className="row mt-4 bookmarks-row d-flex flex-wrap">
+                        <div className="col-4 mt-2 py-2 px-2 w-75 row mt-4 bookmarks-row d-flex flex-wrap">
                             <div
                                 style={{
                                     width: "70%",
