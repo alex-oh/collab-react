@@ -2,8 +2,7 @@
 import axios from "axios";
 
 // set up http request urls
-// const SERVER_API_URL = process.env.REACT_APP_API_BASE;
-const SERVER_API_URL = "http://localhost:4000/api";
+const SERVER_API_URL = process.env.REACT_APP_API_URL;
 const PROJECTS_API = `${SERVER_API_URL}/projects`;
 
 // service functions, CRUD operations
