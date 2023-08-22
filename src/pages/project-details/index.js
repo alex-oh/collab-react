@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { findUser } from "../../redux-services/users/users-service.js"; // Import your user service
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import { findProjectById } from '../../redux-services/projects/projects-service';
+
+import { Link } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
@@ -19,7 +24,9 @@ import {
 import { updateUserThunk } from "../../redux-services/auth/auth-thunks.js";
 import { current } from "@reduxjs/toolkit";
 
+
 function ProjectDetails() {
+
     const params = useParams();
     const [project, setProject] = useState([]);
     const [projectOwner, setProjectOwner] = useState(null); // state to hold the user details
@@ -31,6 +38,10 @@ function ProjectDetails() {
     const loadProject = async () => {
         const projectToLoad = await findProjectById(params.pid);
         setProject(projectToLoad);
+
+
+    }
+
     };
 
     useEffect(() => {
@@ -46,6 +57,7 @@ function ProjectDetails() {
         };
 
         fetchUser();
+
     }, [project]);
 
     const currentUserIsProjectOwner = () => {
@@ -96,6 +108,10 @@ function ProjectDetails() {
                     </Card.Text>
 
                     <Card.Text>
+
+                        Project Owner:
+                        {user && <Link to={`/profile/${user._id}`} className="owner-link">{user.username}</Link>}
+
                         Owner:{" "}
                         {projectOwner && (
                             <span
@@ -107,7 +123,9 @@ function ProjectDetails() {
                                 {projectOwner.username}
                             </span>
                         )}
+                        
                     </Card.Text>
+
                     <Card.Text>
                         {/* UPDATE THE HREF BELOW TO BE ...url/user_id  */}
                         NEU Class: {project.classNumber}

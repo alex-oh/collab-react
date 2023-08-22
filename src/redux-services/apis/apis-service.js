@@ -11,18 +11,25 @@ export const createApi = async (api) => {
     const response = await axios.post(APIS_API, api);
     return response.data;
 };
+
 export const findApiById = async (aid) => {
     // send http get request to apis_api, passing in api ID
     const response = await axios.get(APIS_API, aid);
     // response.data is the api object returned from the server
     return response.data;
 };
-export const getApiByLink = async (apiToFind) => {
+
+export const getApiByName = async (apiToFind) => {
     // requests data from apis collection that has same url.
     // UNCOMMENT THE BELOW TWO LINES ONCE CONTROLLER FUNCTION WORKS
     // const response = await axios.get(`${SERVER_API_URL}/apiLink`, apiToFind);
     // returns api object from database (has _id)
     //return response.data;
+
+    const response = await axios.get("http://localhost:4000/api/apis/name", { params: apiToFind });
+    
+    console.log(response);
+
     const sampleApi = {
         _id: "64e0359c6106817b924bcb07",
         title: "Updated Title",
@@ -36,12 +43,14 @@ export const getApiByLink = async (apiToFind) => {
         userFavorites: ["60fa3b254f429b1f5e5e3f1c", "60fa3b254f429b1f5e5e3f1d"],
         __v: 0,
     };
-    return sampleApi;
+    return response;
 };
+
 export const updateApi = async (api) => {
     const response = await axios.put(`${APIS_API}/${api._id}`, api);
     return api;
 };
+
 export const deleteApi = async (apiId) => {
     const response = await axios.delete(`${APIS_API}/${apiId}`);
     return response.data;
