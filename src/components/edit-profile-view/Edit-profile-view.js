@@ -51,11 +51,11 @@ function EditProfileView({ user }) {
     };
 
     return (
-        <div className="col-8 col-sm-8 col-md-8 col-lg-8 profile-container">
+        <div className="col-11 col-sm-11 col-md-11 col-lg-11 profile-container">
             <img
                 src={UserIcon}
                 alt="User Icon"
-                className="mt-2 rounded-circle profile-user-icon img-fluid"
+                className="mt-4 rounded-circle profile-user-icon img-fluid"
             />
             <h4 className="mt-3">{user.username}</h4>
             <div className="bio-container">
@@ -67,7 +67,7 @@ function EditProfileView({ user }) {
                             onChange={(e) => setDescription(e.target.value)}
                             className="mt-4col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
                             placeholder="Enter a bio"
-                            style={{ width: "250px", height: "200px" }}
+                            style={{ width: "310px", height: "100px" }}
                         />
                         <input
                             type="text"
@@ -75,7 +75,7 @@ function EditProfileView({ user }) {
                             onChange={(e) => setEmail(e.target.value)}
                             className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
                             placeholder="Edit your email"
-                            style={{ width: "250px", height: "60px" }}
+                            style={{ width: "310px", height: "60px" }}
                         />
                         <input
                             type="text"
@@ -83,13 +83,13 @@ function EditProfileView({ user }) {
                             onChange={(e) => setPassword(e.target.value)}
                             className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
                             placeholder="Edit your password"
-                            style={{ width: "250px", height: "60px" }}
+                            style={{ width: "310px", height: "60px" }}
                         />
                         <br />
                         <button
                             className="btn btn-success"
                             onClick={handleSave}
-                            style={{ marginLeft: "5px", marginTop: "15px" }}
+                            style={{ marginLeft: "2px", marginTop: "15px" }}
                         >
                             Save
                         </button>
