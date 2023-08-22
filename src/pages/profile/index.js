@@ -1,18 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
-
-// styling
+import { useSelector, useDispatch } from "react-redux";
 import "./index.css";
-
-// services
 import { findUser } from "../../redux-services/users/users-service";
-
-// Bootstrap components
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
-
+import EditProfileBookmarks from "../../components/edit-profile-bookmarks/edit-profile-bookmarks";
 import EditProfileProject from "../../components/edit-profile-projects/edit-profile-project.js";
 import EditProfileView from "../../components/edit-profile-view/Edit-profile-view";
 import ProjectSummaryCard from "../../components/project-summary-card";
@@ -20,38 +11,26 @@ import APICard from "../../components/api-card/APICard";
 import APICards from "../api-finder";
 
 function Profile() {
-    const params = useParams();
-    const [user, setUser] = useState([]);
+    const { uid } = useParams();
+    const [user, setUser] = useState(null);
     const [projects, setProjects] = useState([]);
 
-    let userId = null;
+    const userId = uid || getCurrentUserId(); // hypothetical function to get the logged-in user's ID
 
-    if (!params.uid) {
-        // if there's no id after profile/, then go to currentUser's page
-        console.log("current user's page");
-        // setUser to the currentUser app state variable
-    } else {
-        userId = params.uid;
-        // setUser to a user object (get user by id)
-    }
-
-    // async function to load user based on userId
-    const loadUser = async () => {
-        const userToLoad = await findUser(userId);
-        setUser(userToLoad);
-    };
-
-    const loadProjects = () => {
-        // load projects to the local state so we can display them in the profile page
-    }
-    // load the user
     useEffect(() => {
+        async function loadUser() {
+            try {
+                console.log("userId from profile index.js", userId);
+                const userToLoad = await findUser(userId);
+                setUser(userToLoad);
+            } catch (error) {
+                console.error("Failed to load user:", error);
+            }
+        }
         loadUser();
-    }, []);
+    }, [userId]);
 
-    // confirm local state user variable
     useEffect(() => {
-        console.log(user);
     }, [user]);
 
     return (
@@ -72,13 +51,7 @@ function Profile() {
                         <h4 className="mt-4 bookmarks-h4">Bookmarks:</h4>
                         <div className="row mt-4 bookmarks-row d-flex flex-wrap">
                             <div className="w-10 m-2">
-                                <APICard api={APICards} />
-                            </div>
-                            <div className="w-10 m-2">
-                                <APICard api={APICards} />
-                            </div>
-                            <div className="w-10 m-2">
-                                <APICard api={APICards} />
+                                <EditProfileBookmarks user={user} />
                             </div>
                         </div>
                     </div>
@@ -86,6 +59,12 @@ function Profile() {
             </div>
         </div>
     );
+}
+
+function getCurrentUserId() {
+const currentUser = useSelector((state) => (state.user ? state.user.currentUser : null));
+
+    return currentUser;
 }
 
 export default Profile;

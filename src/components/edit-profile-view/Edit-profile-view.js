@@ -42,15 +42,16 @@ function EditProfileView() {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(loginThunk({ username, password }));
+      await 
       dispatch(updateUserDescriptionThunk({ username, description }));
       dispatch(updateUserEmailThunk({ username, email }));
       dispatch(updateUserPasswordThunk({ username, password }));
+      setPassword("");
+      setEditing(false);
     } catch (error) {
       setErrorMessage("Error updating profile");
       console.error(error);
     }
-    setEditing(false);
   };
 
   return (
