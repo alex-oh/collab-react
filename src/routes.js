@@ -3,12 +3,12 @@ import { Routes, Route } from "react-router";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import ProjectForm from "./pages/create-project";
+// import ProjectForm from "./pages/create-project";
+// import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
 import APICards from "./pages/api-finder";
 import Home from "./pages/home";
 import Login from "./pages/login-pages/login.js";
 import Register from "./pages/login-pages/register.js";
-import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
 import Profile from "./pages/profile";
 import CreateProject from "./pages/create-project";
 import ProjectDetails from "./pages/project-details";

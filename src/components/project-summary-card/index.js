@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { findUser } from "../../redux-services/users/users-service";
-import { Link } from "react-router-dom";
 import "./index.css";
 
 const ProjectSummaryCard = ({ project }) => {

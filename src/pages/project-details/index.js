@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { findUser } from "../../redux-services/users/users-service.js"; // Import your user service
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
+// import Modal from "react-bootstrap/Modal";
+// import Form from "react-bootstrap/Form";
 
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,7 @@ import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import "./index.css";
-import projectData from "./projectDetails.json";
+// import projectData from "./projectDetails.json";
 
 // commented out modal - future feature
 // import Modal from "react-bootstrap/Modal";
@@ -21,7 +21,6 @@ import {
     findProjectById,
 } from "../../redux-services/projects/projects-service";
 import { updateUserThunk } from "../../redux-services/auth/auth-thunks.js";
-import { current } from "@reduxjs/toolkit";
 
 function ProjectDetails() {
     const params = useParams();
@@ -56,7 +55,7 @@ function ProjectDetails() {
         const response =
             projectOwner &&
             currentUser != null &&
-            projectOwner._id == params.uid;
+            projectOwner._id === params.uid;
         return response;
     };
 
@@ -111,17 +110,6 @@ function ProjectDetails() {
                             >
                                 {projectOwner.username}
                             </Link>
-                        )}
-                        Owner:{" "}
-                        {projectOwner && (
-                            <span
-                                onClick={() => {
-                                    navigate(`/profile/${projectOwner._id}`);
-                                }}
-                                className="user-hyperlink"
-                            >
-                                {projectOwner.username}
-                            </span>
                         )}
                     </Card.Text>
 

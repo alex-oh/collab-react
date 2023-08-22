@@ -43,6 +43,7 @@ export const findCourseProjects = async (courseId) => {
 
 export const updateProject = async (project) => {
     const response = await axios.put(`${PROJECTS_API}/${project._id}`, project);
+    // console.log(response);
     return project;
 };
 export const deleteProject = async (projId) => {
