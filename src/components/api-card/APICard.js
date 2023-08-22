@@ -4,10 +4,9 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge"; // Add this at the top with your other imports
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { getApiByName } from '../../redux-services/apis/apis-service.js';
-import { addFavoriteApiToUser } from '../../redux-services/users/users-service.js';
+import { getApiByName } from "../../redux-services/apis/apis-service.js";
+import { addFavoriteApiToUser } from "../../redux-services/users/users-service.js";
 import { addUserToApiFavorites } from "../../redux-services/apis/apis-service.js";
-
 
 import "./APICard.css";
 
@@ -17,12 +16,10 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
 
     const handleApiCardClick = async () => {
         console.log(`Clicked ${api.API}`);
-        
 
-        
         const apiLocal = await getApiByName(api.API);
         console.log(`ID: ${apiLocal._id}`);
-        
+
         // jump to that api's details paage
         navigate(`/apis/${apiLocal._id}`);
     };
@@ -41,23 +38,28 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
 
     const handleFavoriteClick = async (e) => {
         e.stopPropagation();
-    
+
         console.log("Favorite Button Clicked");
         let tempName = api.API.replace(" ", "-");
         console.log(tempName);
-    
+
         try {
             const apiLocal = await getApiByName(tempName);
             console.log("API NAME HERE --->");
             console.log(apiLocal._id);
-    
+
             if (apiLocal && apiLocal._id && currentUser && currentUser._id) {
-                const userResult = await addFavoriteApiToUser(currentUser._id, apiLocal._id);  // Add the API to the user's favorites
+                const userResult = await addFavoriteApiToUser(
+                    currentUser._id,
+                    apiLocal._id
+                ); // Add the API to the user's favorites
                 console.log(userResult);
-                
-                const apiResult = await addUserToApiFavorites(apiLocal._id, currentUser._id);  // Add the user to the API's favorites
+
+                const apiResult = await addUserToApiFavorites(
+                    apiLocal._id,
+                    currentUser._id
+                ); // Add the user to the API's favorites
                 console.log(apiResult);
-    
             } else {
                 console.error("API or User details missing");
             }
@@ -65,7 +67,6 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
             console.error("Error while adding favorite:", error);
         }
     };
-    
 
     return (
         <Card
@@ -107,18 +108,22 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
                     </Button>
                 </a>
 
-                <Button
-                    className="custom-button"
-                    variant="outline-light"
-                    style={{
-                        border: "none",
-                        background: "transparent",
-                        marginLeft: "10px",
-                    }}
-                    onClick={handleFavoriteClick}  // Use the handleFavoriteClick function here
-                >
-                    <span className="material-symbols-outlined">favorite</span>
-                </Button>
+                {currentUser && (
+                    <Button
+                        className="custom-button"
+                        variant="outline-light"
+                        style={{
+                            border: "none",
+                            background: "transparent",
+                            marginLeft: "10px",
+                        }}
+                        onClick={handleFavoriteClick} // Use the handleFavoriteClick function here
+                    >
+                        <span className="material-symbols-outlined">
+                            favorite
+                        </span>
+                    </Button>
+                )}
             </Card.Footer>
         </Card>
     );
