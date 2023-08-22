@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import UserIcon from "../../assets/images/profile.png";
@@ -11,14 +11,16 @@ function EditProfileView({ user }) {
     const [description, setDescription] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [localUser, setLocalUser] = useState([]);
 
     let { currentUser } = useSelector((state) => state.user);
-
-    useEffect(() => {
+    console.log(user);
+    useMemo(() => {
         setDescription(user.description);
         setEmail(user.email);
         setPassword(user.password);
-    }, []);
+        setLocalUser({ ...user });
+    }, [user]);
 
     const handleEdit = () => {
         setEditing(true);
@@ -41,6 +43,7 @@ function EditProfileView({ user }) {
                 password: password,
             };
             dispatch(updateUserThunk(updatedUser));
+            setLocalUser(updatedUser);
             setEditing(false);
         } catch (error) {
             console.error(error);
@@ -54,7 +57,7 @@ function EditProfileView({ user }) {
                 alt="User Icon"
                 className="mt-2 rounded-circle profile-user-icon img-fluid"
             />
-            <h5 className="mt-3">{user.username}</h5>
+            <h4 className="mt-3">{user.username}</h4>
             <div className="bio-container">
                 {editing ? (
                     <div className="">
@@ -92,12 +95,20 @@ function EditProfileView({ user }) {
                         </button>
                     </div>
                 ) : (
-                    <p className="bio-info" style={{ fontSize: "medium" }}>
-                        {user.description || "Enter a bio"}
-                    </p>
+                    <>
+                        <p className="bio-info" style={{ fontSize: "medium" }}>
+                            {localUser.description || "No bio"}
+                        </p>
+                        <div className="mt-2">{localUser.email}</div>
+                        {currentUser && user._id === currentUser._id && (
+                            <div className="bio-info">
+                                Password: {localUser.password}
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
-            <h6 className="mt-3">{user.email}</h6>
+
             {currentUser && user._id === currentUser._id && (
                 <button
                     onClick={editing ? handleCancel : handleEdit}

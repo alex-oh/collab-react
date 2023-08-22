@@ -12,9 +12,9 @@ function GlobalNav() {
     const dispatch = useDispatch();
     let { currentUser } = useSelector((state) => state.user);
 
-    const handleLogout = async() => {
+    const handleLogout = async () => {
         dispatch(logoutThunk());
-    }
+    };
 
     return (
         <div className="frosted-glass">
@@ -22,16 +22,29 @@ function GlobalNav() {
                 <Link to="home" className="collab-logo">
                     <span>NEU</span> Collab
                 </Link>
-                <div className="nav-item float-left">
-                    User: {currentUser ? (<>{currentUser._id}</>) : (<>none</>)}
+                <div className="nav-item float-left text-warning">
+                    User:{" "}
+                    {currentUser && (
+                        <>
+                            id: {currentUser._id}, email: {currentUser.email}
+                            <br />
+                            favoriteApis: {currentUser.favoriteApis}
+                        </>
+                    )}
                 </div>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Link to={currentUser ? "create-project" : "register"} className="nav-item">
+                        <Link
+                            to={currentUser ? "create-project" : "register"}
+                            className="nav-item"
+                        >
                             Create a Project
                         </Link>
-                        <Link to={currentUser ? "api-finder" : "register"} className="nav-item">
+                        <Link
+                            to={currentUser ? "api-finder" : "register"}
+                            className="nav-item"
+                        >
                             API Finder
                         </Link>
                         {currentUser ? (
@@ -39,7 +52,11 @@ function GlobalNav() {
                                 <Link to="profile" className="nav-item">
                                     Hi, {currentUser.username}
                                 </Link>
-                                <Link to="/" className="nav-item" onClick={handleLogout}>
+                                <Link
+                                    to="/"
+                                    className="nav-item"
+                                    onClick={handleLogout}
+                                >
                                     Log out
                                 </Link>
                             </>

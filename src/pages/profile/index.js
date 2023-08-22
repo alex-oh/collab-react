@@ -46,21 +46,25 @@ function Profile() {
 
     const fetchUserBookmarkedAPIs = async () => {
         // Replace this with the actual API call to fetch the user's bookmarked APIs
-        const response = await fetch("https://api.publicapis.org/entries");
-        const data = await response.json();
-        const allApis = data.entries;
-        let bookmarkedAPIsList = [];
-        if (user.favoriteApis) {
-            user.favoriteApis.map((apiId) => {
-                const apiObject = allApis.find(
-                    (api) => api.url === findApiById(apiId).link
-                );
-                // add to the local bookmarked apis list
-                if (bookmarkedAPIsList.indexOf(apiObject) === -1) {
-                    bookmarkedAPIsList.push(apiObject);
-                }
-            });
-            setBookmarkedAPIs(bookmarkedAPIsList);
+        try {
+            const response = await fetch("https://api.publicapis.org/entries");
+            const data = await response.json();
+            const allApis = data.entries;
+            let bookmarkedAPIsList = [];
+            if (user.favoriteApis) {
+                user.favoriteApis.map((apiId) => {
+                    const apiObject = allApis.find(
+                        (api) => api.url === findApiById(apiId).link
+                    );
+                    // add to the local bookmarked apis list
+                    if (bookmarkedAPIsList.indexOf(apiObject) === -1) {
+                        bookmarkedAPIsList.push(apiObject);
+                    }
+                });
+                setBookmarkedAPIs(bookmarkedAPIsList);
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -69,9 +73,11 @@ function Profile() {
         loadUser();
     }, []);
 
-    // laod user's projects
+    // load user's projects
     useEffect(() => {
-        loadMyProjects();
+        if (user.projectsCreated) {
+            loadMyProjects();
+        }
         fetchUserBookmarkedAPIs();
     }, [user]);
 
