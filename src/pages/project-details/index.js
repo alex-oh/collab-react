@@ -5,24 +5,24 @@ import { findUser } from "../../redux-services/users/users-service.js"; // Impor
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
+// import Modal from "react-bootstrap/Modal";
+// import Form from "react-bootstrap/Form";
+
 import { Link } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import "./index.css";
-import projectData from "./projectDetails.json";
+// import projectData from "./projectDetails.json";
 
 import {
     deleteProject,
     findProjectById,
 } from "../../redux-services/projects/projects-service";
 import { updateUserThunk } from "../../redux-services/auth/auth-thunks.js";
-import { current } from "@reduxjs/toolkit";
-
 
 function ProjectDetails() {
-
     const params = useParams();
     const [project, setProject] = useState([]);
     const [projectOwner, setProjectOwner] = useState(null); // state to hold the user details
@@ -49,14 +49,13 @@ function ProjectDetails() {
         };
 
         fetchUser();
-
     }, [project]);
 
     const currentUserIsProjectOwner = () => {
         const response =
             projectOwner &&
             currentUser != null &&
-            projectOwner._id == currentUser._id;
+            projectOwner._id === params.uid;
         return response;
     };
 
@@ -70,7 +69,11 @@ function ProjectDetails() {
         let updatedProjectsCreated = [...currentUser.projectsCreated];
         updatedProjectsCreated.splice(deletedProjIndex);
         // update the user locally
-        currentUser = { ...currentUser, "projectsCreated": updatedProjectsCreated };
+        currentUser = {
+            ...currentUser,
+            projectsCreated: updatedProjectsCreated,
+        };
+
         // push the updated user to the server
         dispatch(updateUserThunk(currentUser));
         navigate("/");
@@ -101,17 +104,16 @@ function ProjectDetails() {
 
                     <Card.Text>
                         Project Owner:
+
                         {projectOwner && <Link to={`/profile/${projectOwner._id}`} className="owner-link">{projectOwner.username}</Link>}
                         Owner:{" "}
                         {projectOwner && (
-                            <span
-                                onClick={() => {
-                                    navigate(`/profile/${projectOwner._id}`);
-                                }}
-                                className="user-hyperlink"
+                            <Link
+                                to={`/profile/${projectOwner._id}`}
+                                className="owner-link"
                             >
                                 {projectOwner.username}
-                            </span>
+                            </Link>
                         )}
                     </Card.Text>
 
@@ -123,7 +125,10 @@ function ProjectDetails() {
                         Completion: {project.completionPercentage}%
                     </Card.Text>
                     <Card.Text>
-                        Looking for: <span className="text-danger">{project.seekingMembers}</span>
+                        Looking for:{" "}
+                        <span className="text-danger">
+                            {project.seekingMembers}
+                        </span>
                     </Card.Text>
                 </Card.Body>
             </Card>

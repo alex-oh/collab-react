@@ -1,22 +1,12 @@
 import React from "react";
 import "./App.css";
-import { HashRouter, Navigate } from "react-router-dom";
-import { Routes, Route } from "react-router";
+import { HashRouter } from "react-router-dom";
+
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
 import GlobalNav from "./components/navigation/nav-bar";
-import ProjectForm from "./pages/create-project";
-import APICards from "./pages/api-finder";
-import Home from "./pages/home";
-
-import Login from "./pages/login-pages/login.js";
-import Register from "./pages/login-pages/register.js";
-import ProfilePictureUpload from "./pages/login-pages/profile-picture-upload.js";
-import Profile from "./pages/profile";
-import CreateProject from "./pages/create-project";
-import ProjectDetails from "./pages/project-details";
-import APIDetails from "./pages/api-details";
+import CollabRoutes from "./routes";
 
 import authReducer from "./redux-services/auth/auth-reducer";
 
@@ -51,6 +41,7 @@ function App() {
                         />
                         <Route path="/projects/:pid" element={<ProjectDetails />} />
                     </Routes>
+                    <CollabRoutes />
                 </div>
             </HashRouter>
         </Provider>

@@ -36,3 +36,5 @@ export const addFavoriteApiToUser = async (userId, apiId) => {
     const response = await axios.put(`${USERS_URL}/${userId}/favorite`, { apiId });
     return response.data;
 };
+
+

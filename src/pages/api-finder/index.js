@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Card from 'react-bootstrap/Card';
-import sampleAPIs from './sampleAPIs.json';
+// import Card from 'react-bootstrap/Card';
+// import sampleAPIs from './sampleAPIs.json';
 
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import APICard from '../../components/api-card/APICard';
-import { useDispatch, useSelector } from "react-redux";
-import { getApiByName } from '../../redux-services/apis/apis-service.js';
+import { useSelector } from "react-redux";
 import './index.css';
 
 

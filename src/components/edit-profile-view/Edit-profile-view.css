@@ -5,16 +5,15 @@
   .bio-container {
     padding: 10px;
     border-radius: 5px;
-    margin-top: 10px;
     display: inline-block; 
     width: 100%; 
     border:none;
   }
   
   .bio-info {
-    font-size: 12px;
-    line-height: 1.5;
-    color: #333;
+    font-size: 14px;
+    line-height: 20px;
+    color: #BCA5A5;
     margin: 0; 
   }
   
