@@ -98,7 +98,7 @@ function EditProfileView({ user }) {
                 )}
             </div>
             <h6 className="mt-3">{user.email}</h6>
-            {currentUser && user._id == currentUser._id && (
+            {currentUser && user._id === currentUser._id && (
                 <button
                     onClick={editing ? handleCancel : handleEdit}
                     className="btn btn-primary"

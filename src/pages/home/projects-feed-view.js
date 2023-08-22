@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import ProjectSummaryCard from "../../components/project-summary-card";
 import { findProjects } from "../../redux-services/projects/projects-service";
 

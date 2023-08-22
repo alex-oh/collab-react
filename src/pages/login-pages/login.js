@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { loginThunk } from "../../redux-services/auth/auth-thunks";
 // import { findMyProjectsThunk } from "../../redux-services/projects/projects-thunks";
@@ -16,12 +16,14 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const showInput = false; // toggle to see local state variables
+
     const handleLogin = async () => {
         try {
             const response = await dispatch(loginThunk({ username, password }));
 
             // check the type of the response
-            if (response.type == REJECTION_TYPE) {
+            if (response.type === REJECTION_TYPE) {
                 console.log("rejected");
             } else {
                 // login success!
@@ -34,16 +36,19 @@ function Login() {
     };
     return (
         <div className="w-50 m-auto">
-            <div>
-                Username:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(username, null, 2)}
-                </pre>
-                Password:{" "}
-                <pre className="text-light">
-                    {JSON.stringify(password, null, 2)}
-                </pre>
-            </div>
+            {showInput && (
+                <div>
+                    Username:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(username, null, 2)}
+                    </pre>
+                    Password:{" "}
+                    <pre className="text-light">
+                        {JSON.stringify(password, null, 2)}
+                    </pre>
+                </div>
+            )}
+
             <h3>Sign into Collab</h3>
             <div className="login-box d-flex flex-column p-4 w-75 m-auto">
                 <p>Username</p>
