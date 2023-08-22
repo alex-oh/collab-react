@@ -47,7 +47,6 @@ function ProjectDetails() {
                 setProjectOwner(response);
             }
         };
-
         fetchUser();
     }, [project]);
 
@@ -55,7 +54,8 @@ function ProjectDetails() {
         const response =
             projectOwner &&
             currentUser != null &&
-            projectOwner._id === params.uid;
+            currentUser._id === projectOwner._id;
+        console.log(response);
         return response;
     };
 
