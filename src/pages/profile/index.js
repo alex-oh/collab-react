@@ -45,23 +45,27 @@ function Profile() {
     };
 
     const fetchUserBookmarkedAPIs = async () => {
-        // Replace this with the actual API call to fetch the user's bookmarked APIs
         try {
             const response = await fetch("https://api.publicapis.org/entries");
             const data = await response.json();
             const allApis = data.entries;
             let bookmarkedAPIsList = [];
             if (user.favoriteApis) {
-                user.favoriteApis.map((apiId) => {
+                user.favoriteApis.map(async (apiId) => {
+                    const apiToFind = await findApiById(apiId);
                     const apiObject = allApis.find(
-                        (api) => api.url === findApiById(apiId).link
+                        (api) => {
+                            // console.log(api.Link === apiToFind.link);
+                            return api.Link === apiToFind.link}
                     );
+                    // console.log(apiObject);
                     // add to the local bookmarked apis list
                     if (bookmarkedAPIsList.indexOf(apiObject) === -1) {
                         bookmarkedAPIsList.push(apiObject);
                     }
                 });
                 setBookmarkedAPIs(bookmarkedAPIsList);
+                console.log(bookmarkedAPIsList);
             }
         } catch (error) {
             console.log(error);
@@ -78,8 +82,10 @@ function Profile() {
         if (user.projectsCreated) {
             loadMyProjects();
         }
-        fetchUserBookmarkedAPIs();
-    }, [user]);
+        if (user) {
+            fetchUserBookmarkedAPIs();
+        }
+    }, [bookmarkedAPIs, user]);
 
     return (
         <div>

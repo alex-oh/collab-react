@@ -66,7 +66,7 @@ function CreateProject() {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#121212",
-                height: "80vh",
+                height: "100vh",
             }}
         >
             <Card
