@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { loginThunk } from "../../redux-services/auth/auth-thunks";
+// import { findMyProjectsThunk } from "../../redux-services/projects/projects-thunks";
 
 import "./login-pages.css";
 
@@ -14,6 +15,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const handleLogin = async () => {
         try {
             const response = await dispatch(loginThunk({ username, password }));

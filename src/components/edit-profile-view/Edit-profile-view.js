@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserDescription } from "./edit-profile-reducer";
+import { updateUserDescriptionThunk, updateUserEmailThunk, updateUserPasswordThunk } from "../../redux-services/users/user-thunks";
+import { loginThunk } from "../../redux-services/auth/auth-thunks";
 
 import UserIcon from "../../assets/images/profile.png";
 import "./Edit-profile-view.css";
@@ -9,6 +10,17 @@ function EditProfileView({ user }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [description, setDescription] = useState(user.description);
+  const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState(user.password);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const username = useSelector((state) => {
+    if (state.user && state.user.currentUser) {
+      return state.user.currentUser.username;
+    }
+    return "";
+  });
+
   const userDescription = useSelector((state) => {
     if (state.user && state.user.currentUser) {
       return state.user.currentUser.description;
@@ -16,25 +28,60 @@ function EditProfileView({ user }) {
     return "";
   });
 
+  const userEmail = useSelector((state) => {
+    if (state.user && state.user.currentUser) {
+      return state.user.currentUser;
+    }
+    return "";
+  });
+
+  const userPassword = useSelector((state) => {
+    if (state.user && state.user.currentUser) {
+      return state.user.currentUser;
+    }
+    return "";
+  });
+
+  // const isCurrentUser = user.username === username;
+
+  useEffect(() => {
+    setDescription(userDescription);
+    setEmail(userEmail);
+    setPassword(userPassword);
+  }, [userDescription, userEmail, userPassword]);
+
   const handleEdit = () => {
     setDescription(userDescription);
+    setEmail(userEmail);
+    setPassword(userPassword);
     setEditing(true);
   };
 
   const handleCancel = () => {
     setDescription(userDescription);
+    setEmail(userEmail);
+    setPassword(userPassword);
     setEditing(false);
   };
 
-  const handleSave = () => {
-    dispatch(updateUserDescription(description)); // Dispatch the action to update the description in the store
-    setEditing(false);
-  };
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await dispatch(loginThunk({ username, password }));
+      console.log(response);
+      dispatch(updateUserDescriptionThunk({ username, description }));
 
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-    dispatch(updateUserDescription(e.target.value));
-  };
+      dispatch(updateUserEmailThunk({ username, email }));
+      dispatch(updateUserPasswordThunk({ username, password }));
+      
+  } catch (error) {
+      setErrorMessage("Error updating profile");
+      console.error(error);
+  }
+  setEditing(false);
+};
+
+
 
   return (
     <div className="col-8 col-sm-8 col-md-8 col-lg-8 profile-container">
@@ -51,11 +98,30 @@ function EditProfileView({ user }) {
             <input
               type="text"
               value={description}
-              onChange={handleDescriptionChange}
-              className="col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input "
+              onChange={(e) => setDescription(e.target.value)}
+              className="mt-4col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input "
               placeholder="Enter a bio"
               style={{ width: "250px", height: "200px" }}
             />
+
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
+              placeholder="Edit your email"
+              style={{ width: "250px", height: "60px" }}
+            />
+
+            <input
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-4 col-xs-8 col-sm-8 col-md-8 col-lg-8 bio-input"
+              placeholder="Edit your password"
+              style={{ width: "250px", height: "60px" }}
+            />
+
             <br />
             <button
               className="btn btn-success"
@@ -66,11 +132,13 @@ function EditProfileView({ user }) {
             </button>
           </div>
         ) : (
-          <p className="bio-info" style={{fontSize:"medium"}}>{userDescription || "Enter a bio"}</p>
+          <p className="bio-info" style={{ fontSize: "medium" }}>
+            {userDescription || "Enter a bio"}
+          </p>
         )}
       </div>
       <h6 className="mt-3">{user.email}</h6>
-
+{/* {isCurrentUser && ( */}
       <button
         onClick={editing ? handleCancel : handleEdit}
         className="btn btn-primary"

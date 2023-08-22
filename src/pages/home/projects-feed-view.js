@@ -2,16 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import ProjectSummaryCard from "../../components/project-summary-card";
-import { findProjectsThunk } from "../../redux-services/projects/projects-thunks";
+import { findProjects } from "../../redux-services/projects/projects-service";
 
 function ProjectsFeed() {
-    const dispatch = useDispatch();
     const [projects, setProjects] = useState([]);
 
     const loadProjects = async () => {
         // load projects
-        const response = await dispatch(findProjectsThunk());
-        setProjects(response.payload);
+        const response = await findProjects();
+        setProjects(response);
     };
     useEffect(() => {
         loadProjects();
@@ -24,7 +23,7 @@ function ProjectsFeed() {
         <div>
             <h3>Projects Feed</h3>
             <ul>
-                {projects.map((project) => (
+                {projects.toReversed().map((project) => (
                     <ProjectSummaryCard key={project._id} project={project} />
                 ))}
             </ul>
