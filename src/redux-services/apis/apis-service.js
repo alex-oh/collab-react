@@ -13,11 +13,12 @@ export const createApi = async (api) => {
 };
 
 export const findApiById = async (aid) => {
-    // send http get request to apis_api, passing in api ID
-    const response = await axios.get(APIS_API, aid);
-    // response.data is the api object returned from the server
+    const url = `${APIS_API}/${aid}`;
+    const response = await axios.get(url);
     return response.data;
 };
+
+
 
 export const getApiByName = async (apiToFind) => {
     const response = await axios.get(`http://localhost:4000/api/apis/name/${apiToFind}`);
@@ -35,3 +36,16 @@ export const deleteApi = async (apiId) => {
     const response = await axios.delete(`${APIS_API}/${apiId}`);
     return response.data;
 };
+
+export const addUserToApiFavorites = async (apiId, userId) => {
+    try {
+        const response = await axios.put(`http://localhost:4000/api/apis/favorites/${apiId}/`, { userId: userId });
+        
+        
+        return response.data;
+    } catch (error) {
+        console.error("Error adding user to API favorites:", error);
+        throw error;
+    }
+}
+

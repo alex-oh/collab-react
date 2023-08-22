@@ -6,6 +6,8 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getApiByName } from '../../redux-services/apis/apis-service.js';
 import { addFavoriteApiToUser } from '../../redux-services/users/users-service.js';
+import { addUserToApiFavorites } from "../../redux-services/apis/apis-service.js";
+
 
 import "./APICard.css";
 
@@ -16,7 +18,10 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
     const handleApiCardClick = async () => {
         console.log(`Clicked ${api.API}`);
         
+
+        
         const apiLocal = await getApiByName(api.API);
+        console.log(`ID: ${apiLocal._id}`);
         
         // jump to that api's details paage
         navigate(`/apis/${apiLocal._id}`);
@@ -36,19 +41,23 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
 
     const handleFavoriteClick = async (e) => {
         e.stopPropagation();
-
+    
         console.log("Favorite Button Clicked");
         let tempName = api.API.replace(" ", "-");
         console.log(tempName);
-
+    
         try {
             const apiLocal = await getApiByName(tempName);
             console.log("API NAME HERE --->");
             console.log(apiLocal._id);
-
+    
             if (apiLocal && apiLocal._id && currentUser && currentUser._id) {
-                const result = await addFavoriteApiToUser(currentUser._id, apiLocal._id);  // Use apiLocal._id here
-                console.log(result);
+                const userResult = await addFavoriteApiToUser(currentUser._id, apiLocal._id);  // Add the API to the user's favorites
+                console.log(userResult);
+                
+                const apiResult = await addUserToApiFavorites(apiLocal._id, currentUser._id);  // Add the user to the API's favorites
+                console.log(apiResult);
+    
             } else {
                 console.error("API or User details missing");
             }
@@ -56,6 +65,7 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
             console.error("Error while adding favorite:", error);
         }
     };
+    
 
     return (
         <Card
