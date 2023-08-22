@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { findUser } from "../../redux-services/users/users-service.js"; // Import your user service
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+
 // import Modal from "react-bootstrap/Modal";
 // import Form from "react-bootstrap/Form";
 
@@ -13,9 +16,6 @@ import Button from "react-bootstrap/Button";
 import "./index.css";
 // import projectData from "./projectDetails.json";
 
-// commented out modal - future feature
-// import Modal from "react-bootstrap/Modal";
-// import Form from "react-bootstrap/Form";
 import {
     deleteProject,
     findProjectById,
@@ -73,6 +73,7 @@ function ProjectDetails() {
             ...currentUser,
             projectsCreated: updatedProjectsCreated,
         };
+
         // push the updated user to the server
         dispatch(updateUserThunk(currentUser));
         navigate("/");
@@ -103,6 +104,9 @@ function ProjectDetails() {
 
                     <Card.Text>
                         Project Owner:
+
+                        {projectOwner && <Link to={`/profile/${projectOwner._id}`} className="owner-link">{projectOwner.username}</Link>}
+                        Owner:{" "}
                         {projectOwner && (
                             <Link
                                 to={`/profile/${projectOwner._id}`}
@@ -136,42 +140,7 @@ function ProjectDetails() {
                 </Card.Body>
             </Card>
 
-            {/* <Modal show={showModal} onHide={handleClose} centered>
-                <Modal.Header>
-                    <Modal.Title>Signup As a Participant</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group>
-                            <Form.Label>Expected Graduation Date</Form.Label>
-                            <Form.Control type="date" />
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>How many hours per week can you give?</Form.Label>
-                            <Form.Control as="select">
-                                <option>1 - 5 Hours</option>
-                                <option>5 - 10 Hours</option>
-                                <option>10 - 20 Hours</option>
-                                <option>21+ Hours</option>
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>What skill can you provide?</Form.Label>
-                            <Form.Control type="text" />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="light" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="dark" type="submit">
-                        Submit
-                    </Button>
-                </Modal.Footer>
-            </Modal> */}
+            
 
             <footer className="sticky-footer">
                 {currentUserIsProjectOwner() && (

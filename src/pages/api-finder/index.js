@@ -9,6 +9,7 @@ import APICard from '../../components/api-card/APICard';
 import { useSelector } from "react-redux";
 import './index.css';
 
+
 function APICards() {
 
     const [searchTerm, setSearchTerm] = useState('');

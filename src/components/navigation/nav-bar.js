@@ -18,10 +18,14 @@ function GlobalNav() {
 
     return (
         <div className="frosted-glass">
+            
             <Navbar variant="dark" expand="lg" className="navbar-content">
                 <Link to="home" className="collab-logo">
                     <span>NEU</span> Collab
                 </Link>
+
+                <div className="nav-item float-left">
+                    {User: {JSON.stringify(currentUser, null, 2)}}
                 <div className="nav-item float-left text-warning">
                     User:{" "}
                     {currentUser && (

@@ -5,6 +5,9 @@ import Badge from "react-bootstrap/Badge"; // Add this at the top with your othe
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { getApiByName } from '../../redux-services/apis/apis-service.js';
+import { addFavoriteApiToUser } from '../../redux-services/users/users-service.js';
+import { addUserToApiFavorites } from "../../redux-services/apis/apis-service.js";
+
 
 import "./APICard.css";
 
@@ -14,17 +17,55 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
 
     const handleApiCardClick = async () => {
         console.log(`Clicked ${api.API}`);
-        console.log(api);
+        
+
+        
         const apiLocal = await getApiByName(api.API);
-        // jump to that api's details page
+        console.log(`ID: ${apiLocal._id}`);
+        
+        // jump to that api's details paage
         navigate(`/apis/${apiLocal._id}`);
     };
 
-    const handleApiBookmark = async () => {
-        console.log(currentUser._id);
-        
+    // const handleApiBookmark = async () => {
+    //     console.log("Favorite Button Clicked for API:", api.API);
+    //     try {
+    //         const apiLocal = await getApiByName(api.API.replace(" ", "-"));
+    //         console.log(apiLocal);
+    //         const result = await addFavoriteApiToUser(currentUser._id, apiLocal._id);  // Assuming apiLocal has an _id field
+    //         console.log(result);
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //     }
+    // };
 
+    const handleFavoriteClick = async (e) => {
+        e.stopPropagation();
+    
+        console.log("Favorite Button Clicked");
+        let tempName = api.API.replace(" ", "-");
+        console.log(tempName);
+    
+        try {
+            const apiLocal = await getApiByName(tempName);
+            console.log("API NAME HERE --->");
+            console.log(apiLocal._id);
+    
+            if (apiLocal && apiLocal._id && currentUser && currentUser._id) {
+                const userResult = await addFavoriteApiToUser(currentUser._id, apiLocal._id);  // Add the API to the user's favorites
+                console.log(userResult);
+                
+                const apiResult = await addUserToApiFavorites(apiLocal._id, currentUser._id);  // Add the user to the API's favorites
+                console.log(apiResult);
+    
+            } else {
+                console.error("API or User details missing");
+            }
+        } catch (error) {
+            console.error("Error while adding favorite:", error);
+        }
     };
+    
 
     return (
         <Card
@@ -65,6 +106,7 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
                         <span className="material-symbols-outlined">link</span>
                     </Button>
                 </a>
+
                 <Button
                     className="custom-button"
                     variant="outline-light"
@@ -73,25 +115,7 @@ function APICard({ api, index, favoritedIndices, toggleFavorite }) {
                         background: "transparent",
                         marginLeft: "10px",
                     }}
-                    onClick={(e) => {
-                        e.stopPropagation();
-
-                        console.log("Favorite Button Clicked");
-                        // console.log(currentUser._id);
-                        let tempName = api.API.replace(" ", "-");
-                        console.log(tempName);
-                        const apiLocal = getApiByName(tempName);
-                        console.log(apiLocal);
-                        
-
-                        // Get clicked API card by name 
-                        // Save API ID to user profile 
-                        // Save user ID to api card 
-                     
-
-
-
-                    }}
+                    onClick={handleFavoriteClick}  // Use the handleFavoriteClick function here
                 >
                     <span className="material-symbols-outlined">favorite</span>
                 </Button>
