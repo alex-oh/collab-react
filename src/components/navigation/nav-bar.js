@@ -38,7 +38,7 @@ function GlobalNav() {
 
                         </Link>
 
-                        <Link to={currentUser ? "api-finder" : "register"} className="nav-item">
+                        <Link to="api-finder" className="nav-item">
 
                             API Finder
 

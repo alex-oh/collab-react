@@ -24,9 +24,9 @@ function CollabRoutes() {
             <Route path="/register" element={<Register />} />
             {currentUser && <>
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/api-finder" element={<APICards />} />
                 <Route path="/create-project" element={<CreateProject />} />
             </>}
+            <Route path="/api-finder" element={<APICards />} />
             <Route path="/profile/:uid" element={<Profile />} />
             <Route path="/apis/:aid" element={<APIDetails />} />
             <Route path="/projects/:pid" element={<ProjectDetails />} />
