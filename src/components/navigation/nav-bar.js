@@ -11,31 +11,27 @@ import { logoutThunk } from "../../redux-services/auth/auth-thunks";
 function GlobalNav() {
     const dispatch = useDispatch();
     let { currentUser } = useSelector((state) => state.user);
-
+    // console.log(currentUser); debugging purposes
     const handleLogout = async () => {
         dispatch(logoutThunk());
     };
 
     return (
         <div className="frosted-glass">
-            
             <Navbar variant="dark" expand="lg" className="navbar-content">
                 <Link to="home" className="collab-logo">
                     <span>NEU</span> Collab
                 </Link>
-
-                <div className="nav-item float-left">
-                    {User: {JSON.stringify(currentUser, null, 2)}}
-                <div className="nav-item float-left text-warning">
+                {/* <div className="nav-item float-left text-warning">
                     User:{" "}
                     {currentUser && (
                         <>
                             id: {currentUser._id}, email: {currentUser.email}
                             <br />
-                            favoriteApis: {currentUser.favoriteApis}
+                            favoriteApis: {JSON.stringify(currentUser.favoriteApis, 2, null)}
                         </>
                     )}
-                </div>
+                </div> */}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
