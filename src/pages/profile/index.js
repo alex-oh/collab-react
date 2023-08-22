@@ -7,30 +7,71 @@ import EditProfileBookmarks from "../../components/edit-profile-bookmarks/edit-p
 import EditProfileProject from "../../components/edit-profile-projects/edit-profile-project.js";
 import EditProfileView from "../../components/edit-profile-view/Edit-profile-view";
 import ProjectSummaryCard from "../../components/project-summary-card";
+import { findMyProjects } from "../../redux-services/projects/projects-service";
 import APICard from "../../components/api-card/APICard";
 import APICards from "../api-finder";
+import { findApiById } from "../../redux-services/apis/apis-service";
 
 function Profile() {
     const { uid } = useParams();
-    const [user, setUser] = useState(null);
+    const { currentUser } = useSelector((state) => state.user);
+    const [user, setUser] = useState([]);
     const [projects, setProjects] = useState([]);
+    const [bookmarkedAPIs, setBookmarkedAPIs] = useState([]);
 
-    const userId = uid || getCurrentUserId(); // hypothetical function to get the logged-in user's ID
+    let userId = null;
+    if (uid) {
+        userId = uid;
+    } else {
+        userId = currentUser._id;
+    }
 
-    useEffect(() => {
-        async function loadUser() {
-            try {
-                console.log("userId from profile index.js", userId);
+    const loadUser = async () => {
+        try {
+            if (userId != null) {
                 const userToLoad = await findUser(userId);
                 setUser(userToLoad);
-            } catch (error) {
-                console.error("Failed to load user:", error);
             }
+        } catch (error) {
+            console.error("Failed to load user:", error);
         }
-        loadUser();
-    }, [userId]);
+    };
 
+    const loadMyProjects = async () => {
+        const response = await findMyProjects(user);
+        console.log(response);
+        setProjects(response);
+    };
+
+    const fetchUserBookmarkedAPIs = async () => {
+        // Replace this with the actual API call to fetch the user's bookmarked APIs
+        const response = await fetch("https://api.publicapis.org/entries");
+        const data = await response.json();
+        const allApis = data.entries;
+        let bookmarkedAPIsList = [];
+        if (user.favoriteApis) {
+            user.favoriteApis.map((apiId) => {
+                const apiObject = allApis.find(
+                    (api) => api.url == findApiById(apiId).link
+                );
+                // add to the local bookmarked apis list
+                if (bookmarkedAPIsList.indexOf(apiObject) == -1) {
+                    bookmarkedAPIsList.push(apiObject);
+                }
+            });
+            setBookmarkedAPIs(bookmarkedAPIsList);
+        }
+    };
+
+    // load user
     useEffect(() => {
+        loadUser();
+    }, []);
+
+    // laod user's projects
+    useEffect(() => {
+        loadMyProjects();
+        fetchUserBookmarkedAPIs();
     }, [user]);
 
     return (
@@ -44,14 +85,34 @@ function Profile() {
                     <div className="row Active_Project_Container ">
                         <div className="Project_Name_1">
                             <div className="col-4 mt-2 py-2 px-2 w-75 Active_Project_Container_image"></div>
-                            <EditProfileProject />
+                            {projects.map((project) => (
+                                <ProjectSummaryCard
+                                    key={project._id}
+                                    project={project}
+                                />
+                            ))}
                         </div>
                     </div>
                     <div>
                         <h4 className="mt-4 bookmarks-h4">Bookmarks:</h4>
                         <div className="row mt-4 bookmarks-row d-flex flex-wrap">
-                            <div className="w-10 m-2">
-                                <EditProfileBookmarks user={user} />
+                            <div
+                                style={{
+                                    width: "70%",
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    justifyContent: "flex-start",
+                                }}
+                            >
+                                {bookmarkedAPIs.map((api, index) => (
+                                    <div
+                                        key={index}
+                                        className="mb-4"
+                                        style={{ marginRight: "2%" }}
+                                    >
+                                        <APICard api={api} index={index} />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -62,7 +123,9 @@ function Profile() {
 }
 
 function getCurrentUserId() {
-const currentUser = useSelector((state) => (state.user ? state.user.currentUser : null));
+    const currentUser = useSelector((state) =>
+        state.user ? state.user.currentUser : null
+    );
 
     return currentUser;
 }
