@@ -57,3 +57,22 @@ p {
     line-height: 16px;
     color: #646464;
 }
+
+/* tablets */
+@media only screen and (max-width : 1024px) {
+    h4 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+
+/* smartphones */
+@media only screen and (max-width : 640px) {
+    body {
+        font-size: 14px;
+    }
+    h4 {
+        font-size: 22px;
+        line-height: 26px;
+    }
+}
