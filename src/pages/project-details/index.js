@@ -106,15 +106,7 @@ function ProjectDetails() {
                         Project Owner:
 
                         {projectOwner && <Link to={`/profile/${projectOwner._id}`} className="owner-link">{projectOwner.username}</Link>}
-                        Owner:{" "}
-                        {projectOwner && (
-                            <Link
-                                to={`/profile/${projectOwner._id}`}
-                                className="owner-link"
-                            >
-                                {projectOwner.username}
-                            </Link>
-                        )}
+                    
                     </Card.Text>
 
                     <Card.Text>
@@ -140,14 +132,14 @@ function ProjectDetails() {
                 </Card.Body>
             </Card>
 
-            
-
             <footer className="sticky-footer">
                 {currentUserIsProjectOwner() && (
                     <Button variant="danger" onClick={handleDeleteProject}>
                         Delete Project
                     </Button>
                 )}
+
+
                 {projectOwner && projectOwner.email && (
                     <a
                         href={`mailto:${projectOwner.email}`}

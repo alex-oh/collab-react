@@ -39,6 +39,7 @@ body, html {
 .dark-card-subtitle, .dark-card-body .card-text {
     margin-top: 10px;
     margin-bottom: 10px;
+    font-size: larger;
 }
 
 .dark-card-subtitle {
