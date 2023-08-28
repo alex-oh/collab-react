@@ -1,4 +1,5 @@
-# CS5610 Web Development - Collab (Final Project)
+# [Collab](https://neu-colab.netlify.app/)
+## Authors
 - Thomas Kruger
 - Alex Oh
 - Frank Li
