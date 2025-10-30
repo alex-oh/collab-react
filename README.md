@@ -8,7 +8,7 @@
 Collab is an app created to connect Northeastern students who want to build projects together. Using Collab, a student will be able to find a project or find teammates for a project, as well as get inspiration for projects via the [Public APIs API](https://github.com/davemachado/public-api).
 
 ## Links
-[Netlify Deployment](https://neu-colab.netlify.app/)
+[Netlify Deployment](https://neu-colab.netlify.app/) (disabled 10/29/25)
 
 [Express/Node Server Repo](https://github.com/alex-oh/collab-node)
 
